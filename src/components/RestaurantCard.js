@@ -1,10 +1,20 @@
-function RestaurantCard() {
+
+
+function RestaurantCard(props) {
     return (
         <li>
-            <h3>Restaurant Name</h3>
-            <p>Great wine</p>
-            <p>Food:</p>
-            <p>Flavour:</p>
+            <h3>{props.name}</h3>
+            <div className="restaurantFlavours">
+                <h4>Flavours</h4>
+                {props.flavours}
+            </div>
+            <div className="restaurantFood">
+                <h4>Types of food</h4>
+                {props.foodType}
+            </div> 
+            <div className="wine">
+                <p>{props.wine}</p>
+            </div>
         </li>
     )
 }

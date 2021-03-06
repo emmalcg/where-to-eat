@@ -1,7 +1,8 @@
 import './App.css';
 //import firebase
 import firebase from './firebase.js';
-import RestaurantCard from './components/RestaurantCard.js'
+import { useEffect, useState } from 'react';
+import RestaurantCard from './components/RestaurantCard.js';
 import Header from './components/Header.js';
 import Form from './components/Form.js';
 
@@ -9,35 +10,81 @@ import Form from './components/Form.js';
 // initialize a state for user input on form
 
 function App() {
-return (
-  <div className="wrapper">
-    <Header />
-    <ul>
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-      <RestaurantCard  />
-    </ul>
-    <Form />
-  </div>
+  const [restaurants, setRestaurants] = useState([]);
+    useEffect(() => {
+      const dbRef = firebase.database().ref();
 
-)
+      dbRef.on('value', (data) => {
+        const restaurantData = data.val();
+        // console.log(restaurantData);
+
+        const restaurantList = [];
 
 
+        for (let restaurantKey in restaurantData) {
+          restaurantList.push({
+            uniqueKey: restaurantKey,
+            name: restaurantData[restaurantKey].name,
+            wine: restaurantData[restaurantKey].wine,
+            flavours: restaurantData[restaurantKey].flavours.split(' , '),
+            foodType: restaurantData[restaurantKey].foodType.split(' , '),
+          })
+        }
+        setRestaurants(restaurantList);
+        console.log(restaurantList);
 
+      })
+    }, [])
 
+  return (
+    <div className="wrapper">
+      <Header />
+      <ul>
+        {
+          restaurants.map((restaurant) => {
+            return (
+              <RestaurantCard 
+                key={ restaurant.uniqueKey }
+                name={ restaurant.name }
+                wine={ restaurant.wine ? 'natural wine' : null }
+                flavours={ restaurant.flavours.map((flavour) => {
+                  return (
+                    <p>{ flavour }</p>
+                  )
+                }) }
+                foodType={ restaurant.foodType.map((type) => {
+                  return (
+                    <p>{ type }</p>
+                  )
+                }) }
+              />
+            )
+          })
+        }
+        <RestaurantCard />
+        <RestaurantCard  />
+        <RestaurantCard  />
+        <RestaurantCard  />
+        <RestaurantCard  />
+        <RestaurantCard  />
+        <RestaurantCard  />
+        <RestaurantCard  />
+        <RestaurantCard  />
+        <RestaurantCard  />
+        <RestaurantCard  /> 
+      </ul>
+      <Form />
+    </div>
 
-
+    )
 
 }
+
+
+
+
+
+
 //useEffect Hook
   //reference firebase database and save it in a var
   //use firebase .on() method to listen for changes
