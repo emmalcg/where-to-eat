@@ -1,18 +1,31 @@
 import './App.css';
 //import firebase
 import firebase from './firebase.js';
-import RestaurantCard from './RestaurantCard.js'
-import Header from './Header.js';
-import Form from './Form.js';
+import RestaurantCard from './components/RestaurantCard.js'
+import Header from './components/Header.js';
+import Form from './components/Form.js';
 
 //initialize a state for firebase for restaurants 
 // initialize a state for user input on form
 
 function App() {
 return (
-  <div>
+  <div className="wrapper">
     <Header />
-    <RestaurantCard />
+    <ul>
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+      <RestaurantCard  />
+    </ul>
     <Form />
   </div>
 
