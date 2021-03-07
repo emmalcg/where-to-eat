@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import RestaurantCard from './components/RestaurantCard.js';
 import Header from './components/Header.js';
 import Form from './components/Form.js';
+import Footer from './components/Footer.js'
 
 //initialize a state for firebase for restaurants 
 // initialize a state for user input on form
@@ -74,6 +75,7 @@ function App() {
         <RestaurantCard  /> 
       </ul>
       <Form />
+      <Footer />
     </div>
 
     )

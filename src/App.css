@@ -94,7 +94,7 @@ li p {
     margin: 5px 0 5px 10px;
     padding: 5px;
     border: 1px solid #005da9;
-    background-color: #fcfeeb;
+    background-color: #ffedb3;
 }
 
 .wine {
@@ -105,7 +105,7 @@ li p {
     margin: 20px 0 0 0;
     padding: 10px;
     border-top: 1px solid #005da9;
-    background-color: rgb(255, 220, 107);
+    background-color: #ffdc6b;
     display: block;
     text-align: center;
     color: #005da9;
@@ -165,8 +165,8 @@ input[type="text"] {
 }
 input[type="text"]:focus,
 input[type="text"]:hover {
-    background-color: rgb(255, 209, 209);
-    outline: 2px solid #008cff;
+    background-color: #fff1c2;
+    outline: 4px solid #ffdc6b;
 }
 
 input[type="radio"],
@@ -191,7 +191,7 @@ input[type="radio"]:checked + label,
 input[type="radio"]:hover + label, 
 input[type="checkbox"]:checked + label,
 input[type="checkbox"]:hover + label {
-    background-color:rgb(255, 220, 107);
+    background-color: #ffdc6b;
 }
 
 button {
