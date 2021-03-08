@@ -148,6 +148,9 @@ label.restaurantName  {
     text-align: left;
 }
 
+label.restaurantName p {
+    width: 100%;
+}
 form p {
     font-size: 2rem;
     border: 1px solid #005da9;
@@ -165,7 +168,7 @@ input[type="text"] {
 }
 input[type="text"]:focus,
 input[type="text"]:hover {
-    background-color: #fff1c2;
+    background-color: #ffedb3;
     outline: 4px solid #ffdc6b;
 }
 
