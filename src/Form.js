@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Checkbox from './Checkbox.js';
+// import Radio from './Radio.js';
 
 function Form() {
 
@@ -26,6 +27,8 @@ function Form() {
         {name: 'sandwiches', value: false},
         {name: 'seafood', value: false},
     ]);
+
+    const [wineRadio, setWineRadio] = useState('');
 
     const submitData = (event) => {
         event.preventDefault();
@@ -62,6 +65,7 @@ function Form() {
             setFoodFlavours(checkedFoodFlavours);
             // console.log(checkedFoodFlavours);
         } 
+
         if (group === 'foodTypeChoices') {
             const checkedFoodTypes = [ ...foodTypes ];
             let index = 0;
@@ -103,7 +107,7 @@ function Form() {
                                     onChange={(event) => {
                                     handleChoice(event.target.id, event.target.name, event.target.value)
                                     }}
-                                    value={foodFlavour.value}
+                                    value={foodFlavour.name}
                                     text={foodFlavour.name}
                                     htmlFor={foodFlavour.name}
                                 />
@@ -125,7 +129,7 @@ function Form() {
                                     onChange={(event) => {
                                     handleChoice(event.target.id, event.target.name)
                                     }}
-                                    value={foodType.value}
+                                    value={foodType.name}
                                     text={foodType.name}
                                     htmlFor={foodType.name}
                                 />
@@ -136,10 +140,24 @@ function Form() {
 
                 <div className="questionContainer">
                     <p>Natural Wine</p>
-                    <input type="radio" id="yesWine" value="yesWine" name="wine"/>
+                    <input 
+                        type="radio" 
+                        id="yesWine" 
+                        value="yesWine"
+                        name="wine"
+                        checked={wineRadio === 'yesWine'}
+                        onChange={(e) => { setWineRadio(e.target.value)}}
+                    />
                     <label htmlFor="yesWine">Yes</label>
 
-                    <input type="radio" id="noWine" value="noWine" name="wine"/>
+                    <input 
+                        type="radio" 
+                        id="noWine"
+                        value="noWine"
+                        name="wine"
+                        checked={wineRadio === 'noWine'}
+                        onChange={(e) => {setWineRadio(e.target.value)}}
+                    />
                     <label htmlFor="noWine">No</label>
                 </div>
 
