@@ -8,7 +8,7 @@ function Checkbox(props) {
             value={props.value} 
             name={props.name} 
             onChange={props.onChange} 
-            defaultChecked={props.defaultChecked}
+            checked={props.checked}
             />
             <label htmlFor={props.htmlFor}>{props.text}</label>
         </>

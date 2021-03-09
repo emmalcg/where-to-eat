@@ -39,7 +39,11 @@ function App() {
   return (
     <div className="wrapper">
       <Header />
-      <ul>
+
+      <RestaurantCard
+        restaurantInfo={restaurants}
+        />
+      {/* <ul>
         {
           restaurants.map((restaurant) => {
             return (
@@ -61,7 +65,7 @@ function App() {
             )
           })
         } 
-      </ul>
+      </ul> */}
 
       <Form />
     

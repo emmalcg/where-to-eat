@@ -5,12 +5,12 @@ import firebase from './firebase.js';
 
 function Form() {
 
-    const [restaurantName , setRestaurant] = useState('');
+    const [restaurantName , setRestaurantName] = useState('');
     
     const [foodFlavours , setFoodFlavours] = useState([
         {name: 'sour', value: false},
         {name: 'refreshing', value: false},
-        {name: 'warm', value: false},
+        {name: 'savory', value: false},
         {name: 'spicy', value: false},
         {name: 'sweet', value: false},
     ]);
@@ -23,6 +23,7 @@ function Form() {
         {name: 'noodles', value: false},
         {name: 'burger', value: false},
         {name: 'pizza', value: false},
+        {name: 'meat', value: false},
         {name: 'dessert', value: false},
         {name: 'dumplings', value: false},
         {name: 'sandwiches', value: false},
@@ -31,7 +32,7 @@ function Form() {
 
     const [wineRadio, setWineRadio] = useState('');
 
-    const submitData = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         const restaurant = {}
@@ -62,12 +63,48 @@ function Form() {
             restaurant.wine = false;
         }
 
-        console.log(restaurant);
-
         const dbRef = firebase.database().ref();
 
-        dbRef.push(restaurant);
+        console.log(restaurant.flavours.length);
 
+        if (restaurant.flavours.length === 0 && restaurant.foodTypes.length === 0) {
+            alert('please select at least one Flavour and one Type of Food')
+        }
+        else if (restaurant.flavours.length === 0) {
+            alert('please select at least one Flavour')
+        } 
+        else if (restaurant.foodTypes.length === 0) {
+            alert('please select at least one Type of Food')
+        } 
+        else {
+            dbRef.push(restaurant);
+
+            setRestaurantName('');
+
+            setFoodFlavours([
+                {name: 'sour', value: false},
+                {name: 'refreshing', value: false},
+                {name: 'savory', value: false},
+                {name: 'spicy', value: false},
+                {name: 'sweet', value: false},
+            ])
+            setFoodTypes([
+                {name: 'snacks', value: false},
+                {name: 'vegetables', value: false},
+                {name: 'soup', value: false},
+                {name: 'BBQ', value: false},
+                {name: 'noodles', value: false},
+                {name: 'burger', value: false},
+                {name: 'pizza', value: false},
+                {name: 'meat', value: false},
+                {name: 'dessert', value: false},
+                {name: 'dumplings', value: false},
+                {name: 'sandwiches', value: false},
+                {name: 'seafood', value: false},
+            ]);
+
+            setWineRadio('');
+        }
     }
 
     const handleChoice = (e) => {
@@ -102,15 +139,23 @@ function Form() {
     }
 
     return (
-            <form id="form" action="submit">
+            <form onSubmit={handleSubmit}>
                 <legend>add a restaurant</legend>
 
-                <div className="questionContainer nameInput">
-                    <label htmlFor="restaurantName" className="restaurantName"><p>Restaurant Name</p></label>
-                    <input type="text" name="restaurantName" id="restaurantName" onChange={(event)=>{
-                        setRestaurant(event.target.value);
-                    }
-                    }
+                <div className="questionContainer nameInput" >
+                    <label 
+                    htmlFor="restaurantName" 
+                    className="restaurantName">
+                        <p>Restaurant Name</p>
+                    </label>
+                    <input type="text" 
+                    name="restaurantName" 
+                    id="restaurantName" 
+                    onChange={(event)=>{
+                        setRestaurantName(event.target.value);
+                    }}
+                    value={restaurantName}
+                    required
                     />
                 </div>
 
@@ -124,7 +169,7 @@ function Form() {
                                     key={foodFlavour.name}
                                     id={foodFlavour.name}
                                     name={'flavourChoices'}
-                                    defaultChecked={foodFlavour.value}
+                                    checked={foodFlavour.value}
                                     onChange={handleChoice}
                                     value={foodFlavour.name}
                                     text={foodFlavour.name}
@@ -144,7 +189,7 @@ function Form() {
                                     key={foodType.name}
                                     id={foodType.name}
                                     name={'foodTypeChoices'}
-                                    defaultChecked={foodType.value}
+                                    checked={foodType.value}
                                     onChange={handleChoice}
                                     value={foodType.name}
                                     text={foodType.name}
@@ -164,6 +209,7 @@ function Form() {
                         name="wine"
                         checked={wineRadio === 'yesWine'}
                         onChange={(e) => { setWineRadio(e.target.value)}}
+                        required
                     />
                     <label htmlFor="yesWine">Yes</label>
 
@@ -173,13 +219,12 @@ function Form() {
                         value="noWine"
                         name="wine"
                         checked={wineRadio === 'noWine'}
-                        onChange={(e) => {setWineRadio(e.target.value)}}
+                        onChange={(e) => { setWineRadio(e.target.value)}}
                     />
                     <label htmlFor="noWine">No</label>
                 </div>
 
-                <button type="submit" onClick={submitData}>submit</button>
-            
+                <button type="submit">submit</button>
             </form>
     )
 }
