@@ -32,10 +32,39 @@ function App() {
           })
         }
         setRestaurants(restaurantList);
-        console.log(restaurantList);
 
       })
     }, [])
+
+    const submitData = (e) => {
+        e.preventDefault();
+
+        const selectedRestaurant = restaurantName;
+
+        const filteredFlavours = foodFlavours.filter((flavour) => {
+            return flavour.value === true;
+        });
+
+        const selectedFlavours = filteredFlavours.map((flavour) => {
+            return flavour.name;
+        })
+
+        const filteredFoodTypes = foodTypes.filter((foodType) => {
+            return foodType.value === true;
+        });
+
+        const selectedFoodTypes = filteredFoodTypes.map((foodType) => {
+            return foodType.name;
+        })
+
+        let selectedWine;
+
+        if (wineRadio === 'yesWine') {
+            selectedWine = true
+        } else {
+            selectedWine =false;
+        }
+    }
 
   return (
     <div className="wrapper">
@@ -50,12 +79,12 @@ function App() {
                 wine={ restaurant.wine ? 'natural wine' : null }
                 flavours={ restaurant.flavours.map((flavour) => {
                   return (
-                    <p>{ flavour }</p>
+                    <p key={flavour}>{ flavour }</p>
                   )
                 }) }
                 foodType={ restaurant.foodType.map((type) => {
                   return (
-                    <p>{ type }</p>
+                    <p key={type}>{ type }</p>
                   )
                 }) }
               />

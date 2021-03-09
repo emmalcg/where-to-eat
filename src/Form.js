@@ -30,31 +30,43 @@ function Form() {
 
     const [wineRadio, setWineRadio] = useState('');
 
-    const submitData = (event) => {
-        event.preventDefault();
+    const submitData = (e) => {
+        e.preventDefault();
 
-        // const selectedFlavours = [];
-        // const selectedFoodTypes = [];
+        const selectedRestaurant = restaurantName;
 
-        // for (let key in flavours) {
-        //     if (flavours[key]) {
-        //         selectedFlavours.push(key);
-        //         }
-        // }
-        // for(let key in foodTypes) {
-        //     if (foodTypes[key]) {
-        //         selectedFoodTypes.push(key);
-        //     }
-        // }
+        const filteredFlavours = foodFlavours.filter((flavour) => {
+            return flavour.value === true;
+        });
+
+        const selectedFlavours = filteredFlavours.map((flavour) => {
+            return flavour.name;
+        })
+
+        const filteredFoodTypes = foodTypes.filter((foodType) => {
+            return foodType.value === true;
+        });
+
+        const selectedFoodTypes = filteredFoodTypes.map((foodType) => {
+            return foodType.name;
+        })
+
+        let selectedWine;
+
+        if (wineRadio === 'yesWine') {
+            selectedWine = true
+        } else {
+            selectedWine =false;
+        }
     }
 
-    const handleChoice = (choice, group, value) => {
-        // console.log(group);
-        // console.log(choice);
+    const handleChoice = (e) => {
+        const choice = e.target.value;
+        const group = e.target.name;
+
         if (group === 'flavourChoices') {
 
             const checkedFoodFlavours = [ ...foodFlavours ];
-            console.log(checkedFoodFlavours);
             let index = 0;
             for (let i = 0; i < checkedFoodFlavours.length; i++) {
                 if (checkedFoodFlavours[i].name === choice) {
@@ -63,7 +75,6 @@ function Form() {
             }
             checkedFoodFlavours[index].value = !checkedFoodFlavours[index].value;
             setFoodFlavours(checkedFoodFlavours);
-            // console.log(checkedFoodFlavours);
         } 
 
         if (group === 'foodTypeChoices') {
@@ -104,9 +115,7 @@ function Form() {
                                     id={foodFlavour.name}
                                     name={'flavourChoices'}
                                     defaultChecked={foodFlavour.value}
-                                    onChange={(event) => {
-                                    handleChoice(event.target.id, event.target.name, event.target.value)
-                                    }}
+                                    onChange={handleChoice}
                                     value={foodFlavour.name}
                                     text={foodFlavour.name}
                                     htmlFor={foodFlavour.name}
@@ -126,9 +135,7 @@ function Form() {
                                     id={foodType.name}
                                     name={'foodTypeChoices'}
                                     defaultChecked={foodType.value}
-                                    onChange={(event) => {
-                                    handleChoice(event.target.id, event.target.name)
-                                    }}
+                                    onChange={handleChoice}
                                     value={foodType.name}
                                     text={foodType.name}
                                     htmlFor={foodType.name}
