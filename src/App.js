@@ -27,45 +27,15 @@ function App() {
             uniqueKey: restaurantKey,
             name: restaurantData[restaurantKey].name,
             wine: restaurantData[restaurantKey].wine,
-            flavours: restaurantData[restaurantKey].flavours.split(' , '),
-            foodType: restaurantData[restaurantKey].foodType.split(' , '),
+            flavours: restaurantData[restaurantKey].flavours,
+            foodTypes: restaurantData[restaurantKey].foodTypes,
           })
         }
         setRestaurants(restaurantList);
 
       })
     }, [])
-
-    const submitData = (e) => {
-        e.preventDefault();
-
-        const selectedRestaurant = restaurantName;
-
-        const filteredFlavours = foodFlavours.filter((flavour) => {
-            return flavour.value === true;
-        });
-
-        const selectedFlavours = filteredFlavours.map((flavour) => {
-            return flavour.name;
-        })
-
-        const filteredFoodTypes = foodTypes.filter((foodType) => {
-            return foodType.value === true;
-        });
-
-        const selectedFoodTypes = filteredFoodTypes.map((foodType) => {
-            return foodType.name;
-        })
-
-        let selectedWine;
-
-        if (wineRadio === 'yesWine') {
-            selectedWine = true
-        } else {
-            selectedWine =false;
-        }
-    }
-
+    console.log(restaurants);
   return (
     <div className="wrapper">
       <Header />
@@ -82,7 +52,7 @@ function App() {
                     <p key={flavour}>{ flavour }</p>
                   )
                 }) }
-                foodType={ restaurant.foodType.map((type) => {
+                foodType={ restaurant.foodTypes.map((type) => {
                   return (
                     <p key={type}>{ type }</p>
                   )
@@ -102,54 +72,5 @@ function App() {
 
 }
 
-
-
-
-
-
-//useEffect Hook
-  //reference firebase database and save it in a var
-  //use firebase .on() method to listen for changes
-
-  //use a for in loop to loop through firebase data and store the data within an array
-
-  //use updater function from destructuring state to update state with the array of restaurant objects 
-
-  //user input data will be stored in fire base and look like this : 
-  //uniqueKey: {
-   //     name: `Sugo`,
-      //  wine: false,
-     //   food: [`pasta`, `sandwich`],
-     //   flavour: [`warm`]
- //   }
-
- //handle change event for form inputs 
- //tell react the state is changing in the form 
-
- //submit event handler
-    // push the values from the form into the state variable to the firebase database 
-
-    //heading: where 2 eat! 
-    
-    //text: submit your recommendation of where to eat in the city
-    //button that allows use to start their input of restaurant recommendations 
-    //listen to the button click event to scroll to the form section
-
-    
-    //map through restaurant array in state and display restaurants and information to page in <ul>
-    
-    
-    
-    
-
-    //form html 
-    // bind user inputs to the state 
-  //text input : restaurant name 
-
-  //radio button: natural wine? Y/N 
-
-  //checkbox input: what food is good here? type: snacks, vegetables, soup, noodles, burger, pizza, pasta, dumplings, seafood 
-
-  //checkbox input: what kind of flavours does this restaurant satisfy?  sour, light/refreshing, warm/comfort, spicy, sweet 
 
 export default App;

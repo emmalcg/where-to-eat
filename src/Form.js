@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Checkbox from './Checkbox.js';
+import firebase from './firebase.js';
 // import Radio from './Radio.js';
 
 function Form() {
@@ -33,13 +34,15 @@ function Form() {
     const submitData = (e) => {
         e.preventDefault();
 
-        const selectedRestaurant = restaurantName;
+        const restaurant = {}
+
+        restaurant.name = restaurantName;
 
         const filteredFlavours = foodFlavours.filter((flavour) => {
             return flavour.value === true;
         });
 
-        const selectedFlavours = filteredFlavours.map((flavour) => {
+        restaurant.flavours = filteredFlavours.map((flavour) => {
             return flavour.name;
         })
 
@@ -47,17 +50,24 @@ function Form() {
             return foodType.value === true;
         });
 
-        const selectedFoodTypes = filteredFoodTypes.map((foodType) => {
+        restaurant.foodTypes = filteredFoodTypes.map((foodType) => {
             return foodType.name;
         })
 
-        let selectedWine;
+        restaurant.wine = undefined;
 
         if (wineRadio === 'yesWine') {
-            selectedWine = true
+            restaurant.wine = true
         } else {
-            selectedWine =false;
+            restaurant.wine = false;
         }
+
+        console.log(restaurant);
+
+        const dbRef = firebase.database().ref();
+
+        dbRef.push(restaurant);
+
     }
 
     const handleChoice = (e) => {
