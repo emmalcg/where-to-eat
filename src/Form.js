@@ -138,7 +138,7 @@ function Form() {
     }
 
     return (
-            <form onSubmit={handleSubmit}>
+            <form id="form" onSubmit={handleSubmit}>
                 <div className="formTitle">
                     <legend>add a restaurant</legend>
                 </div>
