@@ -39,13 +39,12 @@ function App() {
   return (
     <div className="wrapper">
       <Header />
-
+      <main>
       <RestaurantCard
         restaurantInfo={restaurants}
         />
-        
       <Form />
-    
+      </main>
       <Footer />
     </div>
 

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Checkbox from './Checkbox.js';
 import firebase from './firebase.js';
-// import Radio from './Radio.js';
 
 function Form() {
 
@@ -26,7 +25,7 @@ function Form() {
         {name: 'meat', value: false},
         {name: 'dessert', value: false},
         {name: 'dumplings', value: false},
-        {name: 'sandwiches', value: false},
+        {name: 'sandwich', value: false},
         {name: 'seafood', value: false},
     ]);
 
@@ -99,7 +98,7 @@ function Form() {
                 {name: 'meat', value: false},
                 {name: 'dessert', value: false},
                 {name: 'dumplings', value: false},
-                {name: 'sandwiches', value: false},
+                {name: 'sandwich', value: false},
                 {name: 'seafood', value: false},
             ]);
 
@@ -151,15 +150,15 @@ function Form() {
                     <input type="text" 
                     name="restaurantName" 
                     id="restaurantName" 
-                    onChange={(event)=>{
-                        setRestaurantName(event.target.value);
+                    onChange={(e)=>{
+                        setRestaurantName(e.target.value);
                     }}
                     value={restaurantName}
                     required
                     />
                 </div>
 
-                <div className="questionContainer">
+                <div className="questionContainer kindsOfFlavours">
                     <p>Kind of Flavours</p>
                     
                     {
@@ -180,7 +179,7 @@ function Form() {
                     }
                 </div>
 
-                <div className="questionContainer">
+                <div className="questionContainer typesOfFood">
                     <p>Types of Food</p>
                     {
                         foodTypes.map((foodType) => {
