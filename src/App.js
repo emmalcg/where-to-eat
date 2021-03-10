@@ -43,30 +43,7 @@ function App() {
       <RestaurantCard
         restaurantInfo={restaurants}
         />
-      {/* <ul>
-        {
-          restaurants.map((restaurant) => {
-            return (
-              <RestaurantCard 
-                key={ restaurant.uniqueKey }
-                name={ restaurant.name }
-                wine={ restaurant.wine ? 'natural wine' : null }
-                flavours={ restaurant.flavours.map((flavour) => {
-                  return (
-                    <p key={flavour}>{ flavour }</p>
-                  )
-                }) }
-                foodType={ restaurant.foodTypes.map((type) => {
-                  return (
-                    <p key={type}>{ type }</p>
-                  )
-                }) }
-              />
-            )
-          })
-        } 
-      </ul> */}
-
+        
       <Form />
     
       <Footer />

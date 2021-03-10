@@ -9,15 +9,32 @@ function RestaurantCard(props) {
                         <h3>{restaurant.name}</h3>
                         <div className="restaurantFlavours">
                             <h4>Flavours</h4>
-                            {restaurant.flavours}
+                            {
+                            restaurant.flavours.map((flavour) => {
+                                return (
+                                    <p
+                                    key={flavour}>{flavour}</p>
+                                )
+                            })
+                            }
                         </div>
                         <div className="restaurantFood">
                             <h4>Types of food</h4>
-                            {props.foodType}
+                            {
+                            restaurant.foodTypes.map((foodType) => {
+                                return (
+                                    <p key={foodType}>{foodType}</p>
+                                )
+                            })
+                            }   
                         </div>
-                        <div className="wine">
-                            <p>{props.wine}</p>
-                        </div>
+                        {
+                            restaurant.wine === true &&
+                            <div className="wine">
+                                <p>Natural wine</p>
+                            </div>
+                            
+                        }
                     </li>
                 )
             })
@@ -25,6 +42,7 @@ function RestaurantCard(props) {
         </ul>
     )
 }
+
 
 export default RestaurantCard; 
 
