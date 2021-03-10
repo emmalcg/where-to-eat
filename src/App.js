@@ -40,8 +40,8 @@ function App() {
           />
         <Form />
         </main>
-        <Footer />
       </div>
+      <Footer />
     </div>
 
     )

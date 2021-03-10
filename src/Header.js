@@ -1,9 +1,9 @@
+import Marquee from "./Marquee.js"
+
 function Header() {
     return(
         <header>
-            <div className="marqueeContainer">
-                <h2>favourite places in toronto</h2>
-            </div>
+            <Marquee text="Favourite places in Toronto" />
             <h1>where to eat</h1>
             <div className="linkContainer">
                 <a href="#form">add a restaurant</a>

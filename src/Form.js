@@ -138,8 +138,10 @@ function Form() {
     }
 
     return (
-            <form id="form" onSubmit={handleSubmit}>
-                <legend>add a restaurant</legend>
+            <form onSubmit={handleSubmit}>
+                <div className="formTitle">
+                    <legend>add a restaurant</legend>
+                </div>
 
                 <div className="questionContainer nameInput" >
                     <label 
@@ -147,9 +149,7 @@ function Form() {
                     className="restaurantName">
                         <p>Restaurant Name</p>
                     </label>
-                    <input 
-                    type="text"
-                    placeholder="Enter the restaurant name" 
+                    <input type="text" 
                     name="restaurantName" 
                     id="restaurantName" 
                     onChange={(e)=>{
@@ -217,7 +217,7 @@ function Form() {
                         onChange={(e) => { setWineRadio(e.target.value)}}
                         required
                     />
-                    <label htmlFor="yesWine">yes</label>
+                    <label htmlFor="yesWine">Yes</label>
 
                     <input 
                         type="radio" 
@@ -227,7 +227,7 @@ function Form() {
                         checked={wineRadio === 'noWine'}
                         onChange={(e) => { setWineRadio(e.target.value)}}
                     />
-                    <label htmlFor="noWine">no</label>
+                    <label htmlFor="noWine">No</label>
                 </fieldset>
 
                 <button type="submit">submit</button>
