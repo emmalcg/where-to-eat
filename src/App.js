@@ -31,15 +31,17 @@ function App() {
     }, [])
     console.log(restaurants);
   return (
-    <div className="wrapper">
+    <div>
       <Header />
-      <main>
-      <RestaurantCard
-        restaurantInfo={restaurants}
-        />
-      <Form />
-      </main>
-      <Footer />
+      <div className="wrapper">
+        <main>
+        <RestaurantCard
+          restaurantInfo={restaurants}
+          />
+        <Form />
+        </main>
+        <Footer />
+      </div>
     </div>
 
     )
