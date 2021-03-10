@@ -219,31 +219,43 @@ input[type="text"]:hover {
     outline: 4px solid var(--dark-secondary-color);
 }
 
-/* input[type="radio"],
+input[type="radio"],
 input[type="checkbox"] {
-    opacity: 0; 
+    opacity: 1; 
     position: fixed;
     width: 0px;
     height: 0px; 
-} */
-
-input[type="radio"],
-input[type="checkbox"] {
-    position: absolute
 }
 
+/* svg {
+    position: absolute;
+    bottom: 5px;
+    left: 45%;
+    opacity: 0;
+} */
+
 label {
+    position: relative;
     font-size: 1.6rem;
     outline: 1px solid var(--main-text-color);
     width: calc(100% / 7);
     min-width: 85px;
+    min-height: 60px;
     text-align: center;
     padding: 10px 5px 30px 5px;
     background-color: var(--lightened-background);
 }
 
+fieldset label {
+    cursor: pointer;
+}
+
 .questionContainer {
     flex-wrap: wrap;
+}
+
+.wineQuestion {
+    z-index: -1;
 }
 
 input[type="radio"]:checked + label,

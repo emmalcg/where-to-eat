@@ -1,25 +1,22 @@
-import { Icon, InlineIcon } from '@iconify/react';
-import checkmarkIcon from '@iconify-icons/gridicons/checkmark';
 
 function Checkbox(props) {
     return (
         <>
+            <input 
+            key={props.value} 
+            type="checkbox" 
+            id={props.id} 
+            value={props.value} 
+            name={props.name} 
+            onChange={props.onChange} 
+            checked={props.checked}
+            />
             <label 
             htmlFor={props.htmlFor}
-            tabIndex="0">
-                <input 
-                key={props.value} 
-                type="checkbox" 
-                id={props.id} 
-                value={props.value} 
-                name={props.name} 
-                onChange={props.onChange} 
-                checked={props.checked}
-                />
+            >
                 {props.text}
-                <Icon icon={checkmarkIcon} />
             </label>
-        </>
+            </>
     )
 }
 
