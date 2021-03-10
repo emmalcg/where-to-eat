@@ -10,7 +10,11 @@ function Checkbox(props) {
             onChange={props.onChange} 
             checked={props.checked}
             />
-            <label htmlFor={props.htmlFor}>{props.text}</label>
+            <label 
+            htmlFor={props.htmlFor}
+            tabIndex="0">
+                {props.text}
+            </label>
         </>
     )
 }

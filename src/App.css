@@ -166,14 +166,22 @@ label.restaurantName  {
 
 label.restaurantName p {
     width: 100%;
+    text-transform: uppercase;
+    font-style: italic;
 }
 
-form p {
+.questionContainer div {
+    width: calc((100% / 7) * 2);
+}
+
+form p,
+.questionContainer legend {
     font-size: 2rem;
     outline: 1px solid var(--main-text-color);
     padding: 20px 15px;
-    width: calc((100% / 7) * 2);
+    width: 100%;
     background-color: var(--lightened-background);
+    text-align: left;
 }
 
 input[type="text"] {
@@ -214,8 +222,10 @@ label {
 
 input[type="radio"]:checked + label,
 input[type="radio"]:hover + label,
+input[type="radio"]:focus + label,
 input[type="checkbox"]:checked + label,
-input[type="checkbox"]:hover + label {
+input[type="checkbox"]:hover + label,
+input[type="checkbox"]:focus + label {
     background-color: var(--dark-secondary-color);
 }
 

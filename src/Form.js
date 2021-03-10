@@ -158,9 +158,10 @@ function Form() {
                     />
                 </div>
 
-                <div className="questionContainer kindsOfFlavours">
-                    <p>Kind of Flavours</p>
-                    
+                <fieldset className="questionContainer kindsOfFlavours">
+                    <div>
+                        <legend>Kind of Flavours</legend>
+                    </div>
                     {
                         foodFlavours.map((foodFlavour) => {
                             return (
@@ -177,10 +178,12 @@ function Form() {
                             )
                         })
                     }
-                </div>
+                </fieldset>
 
-                <div className="questionContainer typesOfFood">
-                    <p>Types of Food</p>
+                <fieldset className="questionContainer typesOfFood">
+                    <div>
+                        <legend>Types of Food</legend>
+                    </div>
                     {
                         foodTypes.map((foodType) => {
                             return (
@@ -197,10 +200,12 @@ function Form() {
                             )
                         })
                     }
-                </div>
+                </fieldset>
 
-                <div className="questionContainer">
-                    <p>Natural Wine</p>
+                <fieldset className="questionContainer">
+                    <div>
+                        <legend>Natural Wine</legend>
+                    </div>
                     <input 
                         type="radio" 
                         id="yesWine" 
@@ -221,7 +226,7 @@ function Form() {
                         onChange={(e) => { setWineRadio(e.target.value)}}
                     />
                     <label htmlFor="noWine">No</label>
-                </div>
+                </fieldset>
 
                 <button type="submit">submit</button>
             </form>
