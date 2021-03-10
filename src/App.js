@@ -8,6 +8,7 @@ import Footer from './Footer.js'
 
 function App() {
   const [restaurants, setRestaurants] = useState([]);
+
     useEffect(() => {
       const dbRef = firebase.database().ref();
 
@@ -26,10 +27,9 @@ function App() {
           })
         }
         setRestaurants(restaurantList);
-
       })
     }, [])
-    console.log(restaurants);
+
   return (
     <div>
       <Header />
