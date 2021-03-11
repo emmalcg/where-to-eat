@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import Pointy from './Pointy.js';
 
 function Marquee(props) {
     const [isActive, setIsActive] = useState(true)
@@ -17,12 +18,19 @@ function Marquee(props) {
                 <h2 className={isActive 
                 ? 'marquee-content'
                 : 'marquee-content inactive'}>
+                    <Pointy className="smallIcon"/>
                     <span>{props.text}</span>
+                    <Pointy className="smallIcon"/>
                     <span>{props.text}</span>
+                    <Pointy className="smallIcon"/>
                     <span>{props.text}</span>
+                    <Pointy className="smallIcon"/>
                     <span>{props.text}</span>
+                    <Pointy className="smallIcon"/>
                     <span>{props.text}</span>
+                    <Pointy className="smallIcon"/>
                     <span>{props.text}</span>
+                    <Pointy className="smallIcon"/>
                     </h2>
             </div>
         </div>

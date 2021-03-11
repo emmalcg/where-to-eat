@@ -1,4 +1,4 @@
-import Marquee from "./Marquee.js"
+import Marquee from './Marquee.js';
 
 function Header() {
     return(

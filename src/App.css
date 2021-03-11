@@ -31,6 +31,11 @@ div.marqueeContainer {
     border-bottom: 1px solid var(--main-text-color);
 }
 
+.smallIcon {
+    width: 50px;
+    height: 50px;
+}
+
 .marquee {
     position: absolute;
     white-space: nowrap;
@@ -58,11 +63,11 @@ div.marqueeContainer {
 
 @keyframes marquee {
     from {
-    transform: translateX(10%)
+    transform: translateX(-100%)
     }
 
     to {
-    transform: translateX(-10%)
+    transform: translateX(15%)
     }
 }
 
