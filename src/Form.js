@@ -64,8 +64,6 @@ function Form() {
 
         const dbRef = firebase.database().ref();
 
-        console.log(restaurant.flavours.length);
-
         if (restaurant.flavours.length === 0 && restaurant.foodTypes.length === 0) {
             alert('please select at least one Flavour and one Type of Food')
         }
