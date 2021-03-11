@@ -130,7 +130,6 @@ li.restaurantItem {
     flex-direction: column;
     list-style-type: none;
     background-color: var(--lightened-background);
-    color: var(--main-text-color);
     text-transform: uppercase;
     border: solid 1px var(--main-text-color);
 }
@@ -180,12 +179,10 @@ div.wine p {
     border: none;
     border-top: 1px solid var(--main-text-color);
     background-color: var(--dark-secondary-color);
-    display: block;
-    text-align: center;
     font-size: 1.9rem;
     font-weight: 800;
+    text-align: center;
     font-style: italic;
-    color: var(--main-text-color);
 }
 
 form {
@@ -194,7 +191,6 @@ form {
     margin: 50px auto;
     width: 100%;
     max-width: 820px;
-    color:var(--main-text-color);
 }
 
 .formTitle,
@@ -208,20 +204,24 @@ button {
     font-style: italic;
 }
 
+.formTitle {
+    padding: 20px 15px;
+}
+
 .questionContainer {
     display: flex;
 }
 
 label.restaurantName,
 .questionContainer div {
+    width: calc((100% / 7) * 2);
+    padding: 20px 15px;
     text-transform: uppercase;
     font-style: italic;
     font-size: 2rem;
-    outline: 1px solid var(--main-text-color);
-    padding: 20px 15px;
-    width: calc((100% / 7) * 2);
-    background-color: var(--lightened-background);
     text-align: left;
+    outline: 1px solid var(--main-text-color);
+    background-color: var(--lightened-background);
 
 }
 
@@ -258,14 +258,13 @@ input[type="checkbox"] {
 }
 
 label {
-    position: relative;
-    font-size: 1.6rem;
-    outline: 1px solid var(--main-text-color);
     width: calc(100% / 7);
     min-width: 85px;
     min-height: 60px;
-    text-align: center;
+    font-size: 1.6rem;
     padding: 10px 5px 30px 5px;
+    outline: 1px solid var(--main-text-color);
+    text-align: center;
     background-color: var(--lightened-background);
     transition: all 0.8s ease;
 }
@@ -288,9 +287,9 @@ input[type="checkbox"]:focus + label {
 }
 
 button {
-    margin: 20px auto;
     width: 25%;
     min-width: 150px;
+    margin: 20px auto;
     font-size: 2rem;
     border: none;
     outline: 1px solid var(--main-text-color);
@@ -330,9 +329,10 @@ footer a:focus {
 
 @media (max-width: 840px) {
     label.restaurantName,
+    input[type="text"]::placeholder,
     .questionContainer legend {
     font-size: 1.7rem;
-    }
+    } 
 
     button {
         width: 38%;
@@ -398,7 +398,7 @@ footer a:focus {
     header a {
     font-size: 1.9rem;
     }
-    
+
 }
 
 @media (prefers-reduced-motion: reduce), (update: slow) {

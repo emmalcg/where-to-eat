@@ -149,7 +149,9 @@ function Form() {
                     className="restaurantName">
                         <p>Restaurant Name</p>
                     </label>
-                    <input type="text" 
+                    <input 
+                    type="text" 
+                    placeholder="enter the restaurant name"
                     name="restaurantName" 
                     id="restaurantName" 
                     onChange={(e)=>{
