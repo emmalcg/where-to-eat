@@ -11,6 +11,7 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
     --light-secondary-color: #ffedb3;
     --dark-secondary-color:  #ffdc6b;
     --bright-contrast: #008cff;
+    --gradient: linear-gradient(67deg, rgba(141,227,247,1) 0%, rgba(215,255,190,1) 30%, rgba(181,250,255,1) 68%, rgba(243, 255, 192, 1) 100%);
 }
 
 html {
@@ -26,7 +27,7 @@ div.marqueeContainer {
     max-width: 100%;
     height: 60px;
     overflow-x: hidden;
-    background: linear-gradient(67deg, rgba(141,227,247,1) 0%, rgba(215,255,190,1) 30%, rgba(181,250,255,1) 68%, rgba(243, 255, 192, 1) 100%); 
+    background: var(--gradient); 
     border-bottom: 1px solid var(--main-text-color);
 }
 
@@ -114,7 +115,7 @@ header a:hover,
 header a:focus {
     letter-spacing: 1px;
     font-size: 2.5rem;
-    background: linear-gradient(67deg, rgba(141,227,247,1) 0%, rgba(215,255,190,1) 30%, rgba(181,250,255,1) 68%, rgba(243, 255, 192, 1) 100%); 
+    background: var(--gradient);  
 }
 
 ul.restaurantContainer {
@@ -299,8 +300,7 @@ button {
 
 button:hover,
 button:focus {
-    background: rgb(141,227,247);
-    background: linear-gradient(67deg, rgba(141,227,247,1) 0%, rgba(215,255,190,1) 30%, rgba(181,250,255,1) 68%, rgba(243, 255, 192, 1) 100%); 
+    background: var(--gradient);
 }
 
 footer {
@@ -321,10 +321,9 @@ footer a {
 
 footer a:hover,
 footer a:focus {
-    font-size: 2rem;
+    font-size: 1.8rem;
     letter-spacing: 1px;
-    background: rgb(141,227,247);
-    background: linear-gradient(67deg, rgba(141,227,247,1) 0%, rgba(215,255,190,1) 30%, rgba(181,250,255,1) 68%, rgba(243, 255, 192, 1) 100%);
+    background: var(--gradient);
 }
 
 @media (max-width: 840px) {
@@ -375,13 +374,13 @@ footer a:focus {
 
     .kindsOfFlavours label,
     .typesOfFood label{
-        width: calc(100% /3);
+        width: calc(100% / 3);
     }
     .wineQuestion div {
         width: 100%;
     }
     .wineQuestion label {
-        width: calc(100% /2);
+        width: calc(100% / 2);
     }
 
     button {
