@@ -1,5 +1,6 @@
 function RestaurantCard(props) {
     const { restaurantInfo } = props;
+    
     return (
         <ul className="restaurantContainer">
             {

@@ -31,7 +31,7 @@ function Marquee(props) {
                     <Pointy className="smallIcon"/>
                     <span>{props.text}</span>
                     <Pointy className="smallIcon"/>
-                    </h2>
+                </h2>
             </div>
         </div>
     )
