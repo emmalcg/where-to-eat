@@ -11,7 +11,7 @@ function App() {
 
     useEffect(() => {
       const dbRef = firebase.database().ref();
-
+      console.log(dbRef);
       dbRef.on('value', (data) => {
         const restaurantData = data.val();
 
