@@ -11,7 +11,7 @@ function App() {
 
     useEffect(() => {
       const dbRef = firebase.database().ref();
-      console.log(dbRef);
+      
       dbRef.on('value', (data) => {
         const restaurantData = data.val();
 
@@ -28,7 +28,7 @@ function App() {
         }
         
         const sort = (property) => {
-          const sortOrder = 1;
+          let sortOrder = 1;
 
           if(property[0] ==='-') {
             sortOrder = -1;
@@ -36,7 +36,7 @@ function App() {
           }
 
           return function (a,b) {
-            if(sortOrder == -1) {
+            if(sortOrder === -1) {
               return b[property].localCompare(a[property]);
             }else{
               return a[property].localeCompare(b[property]);
