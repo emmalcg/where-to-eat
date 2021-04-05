@@ -92,7 +92,7 @@ header {
 }
 
 header h1 {
-    margin: 4rem auto 2rem;
+    margin: 4rem auto;
     font-size: calc(2rem + 7vw);
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
@@ -114,8 +114,10 @@ header h2 {
     align-items: center;
 }
 
-.filterContainer {
+form.filterContainer {
     display: flex;
+    margin: 0;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -123,9 +125,10 @@ header h2 {
 select {
     background-color: var(--light-secondary-color);
     padding: 0.25rem 0.5rem;
-    min-width: 20rem;
+    width: 20rem;
+    height: 3.5rem;
     font-size: 1.8rem;
-    margin: 2rem;
+    margin: 0.5rem 2rem;
     border: 1px solid var(--main-text-color);
     color: var(--main-text-color);
     text-transform: uppercase;
@@ -137,8 +140,18 @@ select:hover {
     outline: 3px solid var(--bright-contrast);
 }
 
+.filterContainer button {
+    font-size: 1.8rem;
+    width: 20rem;
+    height: 3.5rem;
+    margin: 0.5rem 2rem;
+    padding: 0.25rem 0.5rem;
+    font-style: normal;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--dark-secondary-color);
+}
 .options a {
-    margin: 1rem 0;
+    margin: 2.5rem 0 1rem;
     width: 20rem;
     display: block;
     padding: 0.5rem;
@@ -224,7 +237,7 @@ div.wine p {
     font-style: italic;
 }
 
-form {
+form.restaurantAdd {
     display: flex;
     flex-direction: column;
     margin: 50px auto;

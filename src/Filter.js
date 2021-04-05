@@ -25,11 +25,16 @@ function Filter({flavours, types, wines}) {
 
     const [wineSelection, setWineSelection] = useState('Natural Wine?');
 
+    const handleFilter = (e) => {
+        e.preventDefault();
+        // filterRestaurants()
+    }
+
     return (
     <div className="options">
 
-        <div className="filterContainer">
-            <label class="sr-only" for="flavourSelection">Choose A Flavour</label>
+        <form className="filterContainer" onSubmit="handleFilter">
+            <label className="sr-only" htmlFor="flavourSelection">Choose A Flavour</label>
     
                 <select id ="flavourSelection"
                     onChange={(e) => {setFlavourSelection(e.target.value)}}
@@ -46,7 +51,7 @@ function Filter({flavours, types, wines}) {
                     ))}
                 </select>
     
-            <label class="sr-only" for="foodTypeSelection">Choose a Type of Food</label>
+            <label className="sr-only" htmlFor="foodTypeSelection">Choose a Type of Food</label>
                 <select id ="foodTypeSelection"
                     onChange={(e) => {setFoodTypeSelection(e.target.value)}}
                     value={foodTypeSelection}
@@ -62,7 +67,7 @@ function Filter({flavours, types, wines}) {
                     ))}
                 </select>
     
-                <label class="sr-only" for="wineSelection">Do you want Natural Wine?</label>
+                <label className="sr-only" htmlFor="wineSelection">Do you want Natural Wine?</label>
                 <select id="wineSelection"
                     onChange={(e) => {setWineSelection(e.target.value)}}
                     value={wineSelection}
@@ -77,7 +82,9 @@ function Filter({flavours, types, wines}) {
                         </option>
                     ))}
                 </select>
-        </div>
+
+                <button>Search</button>
+        </form>
 
         <a href="#form">add a restaurant</a>
     </div>
