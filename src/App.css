@@ -285,11 +285,14 @@ fieldset label {
 
 input[type="radio"]:checked + label,
 input[type="radio"]:hover + label,
-input[type="radio"]:focus + label,
 input[type="checkbox"]:checked + label,
-input[type="checkbox"]:hover + label,
-input[type="checkbox"]:focus + label {
+input[type="checkbox"]:hover + label {
     background-color: var(--dark-secondary-color);
+}
+
+input[type="checkbox"]:focus + label,
+input[type="radio"]:focus + label {
+    text-decoration: underline;
 }
 
 button {
