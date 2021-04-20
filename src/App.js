@@ -3,7 +3,7 @@ import firebase from './firebase.js';
 import { useEffect, useState } from 'react';
 import RestaurantCard from './RestaurantCard.js';
 import Header from './Header.js';
-import Filter from './Filter.js';
+import FilterComponent from './FilterComponent.js';
 import Form from './Form.js';
 import Footer from './Footer.js'
 
@@ -30,18 +30,14 @@ function App() {
     'seafood'
   ]
   const wineChoices = [
-    'shoe me the wine!',
+    'show me the wine!',
     'no wine'
   ]
   const [restaurants, setRestaurants] = useState([]);
   
     useEffect(() => {
       const dbRef = firebase.database().ref();
-<<<<<<< HEAD
-
-=======
       
->>>>>>> 739099e9ba518f3494fc60ca7d5a08e72c1f1699
       dbRef.on('value', (data) => {
         const restaurantData = data.val();
 
@@ -56,15 +52,9 @@ function App() {
             foodTypes: restaurantData[restaurantKey].foodTypes,
           })
         }
-<<<<<<< HEAD
-
-        const sort = (property) => {
-          const sortOrder = 1;
-=======
         
         const sort = (property) => {
           let sortOrder = 1;
->>>>>>> 739099e9ba518f3494fc60ca7d5a08e72c1f1699
 
           if(property[0] ==='-') {
             sortOrder = -1;
@@ -72,11 +62,7 @@ function App() {
           }
 
           return function (a,b) {
-<<<<<<< HEAD
-            if(sortOrder == -1) {
-=======
             if(sortOrder === -1) {
->>>>>>> 739099e9ba518f3494fc60ca7d5a08e72c1f1699
               return b[property].localCompare(a[property]);
             }else{
               return a[property].localeCompare(b[property]);
@@ -97,7 +83,7 @@ function App() {
       <Header />
       <div className="wrapper">
         <main>
-          <Filter 
+          <FilterComponent
           flavours={flavours}
           types={types}
           wines={wineChoices}

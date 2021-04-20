@@ -107,13 +107,13 @@ function Form() {
 
     const handleChoice = (e) => {
         const choice = e.target.value;
-        console.log(choice)
+        
         const group = e.target.name;
         
         if (group === 'flavourChoices') {
 
             const checkedFoodFlavours = _.cloneDeep(foodFlavours);
-            console.log(checkedFoodFlavours)
+            
             let index = 0;
             for (let i = 0; i < checkedFoodFlavours.length; i++) {
                 if (checkedFoodFlavours[i].name === choice) {

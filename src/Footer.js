@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <footer>
-            <a href="https://junocollege.com/">Made at Juno College © 2021</a>
+            <a href="#header">to top</a>
         </footer>
     )
 }
