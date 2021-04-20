@@ -1,4 +1,5 @@
 function Checkbox(props) {
+
     return (
         <>
             <input 
@@ -15,7 +16,7 @@ function Checkbox(props) {
             >
                 {props.text}
             </label>
-        </>
+            </>
     )
 }
 

@@ -37,7 +37,11 @@ function App() {
   
     useEffect(() => {
       const dbRef = firebase.database().ref();
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 739099e9ba518f3494fc60ca7d5a08e72c1f1699
       dbRef.on('value', (data) => {
         const restaurantData = data.val();
 
@@ -52,9 +56,15 @@ function App() {
             foodTypes: restaurantData[restaurantKey].foodTypes,
           })
         }
+<<<<<<< HEAD
 
         const sort = (property) => {
           const sortOrder = 1;
+=======
+        
+        const sort = (property) => {
+          let sortOrder = 1;
+>>>>>>> 739099e9ba518f3494fc60ca7d5a08e72c1f1699
 
           if(property[0] ==='-') {
             sortOrder = -1;
@@ -62,7 +72,11 @@ function App() {
           }
 
           return function (a,b) {
+<<<<<<< HEAD
             if(sortOrder == -1) {
+=======
+            if(sortOrder === -1) {
+>>>>>>> 739099e9ba518f3494fc60ca7d5a08e72c1f1699
               return b[property].localCompare(a[property]);
             }else{
               return a[property].localeCompare(b[property]);

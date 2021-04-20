@@ -34,10 +34,12 @@ function RestaurantCard(props) {
                             </ul>   
                         </div>
                         {
-                            restaurant.wine === true &&
+                            restaurant.wine === true 
+                            ?
                             <div className="wine">
                                 <p>Natural wine</p>
                             </div>
+                            : null
                         }
                     </li>
                 )
