@@ -9,40 +9,31 @@ function FilterComponent({flavours, types, wines}) {
     const [typeOpen, setTypeOpen] = useState(false);
     const [wineOpen, setWineOpen] = useState(false);
 
-    useEffect(() => {
-        if (flavourOpen === true) {
-            setTypeOpen(false)
-        }
-        if(typeOpen === true) {
-            setFlavourOpen(false)
-            console.log()
-        }
+
+    useOnClickOutside(typeOpen, () => setTypeOpen(false));
+    useOnClickOutside(flavourOpen, () => setFlavourOpen(false));
 
 
-    }, [typeOpen, flavourOpen])
+    function useOnClickOutside(isOpen, handler) {
+        useEffect (
+            () => {
+                const listener = (e) => {
+                    if (!isOpen || e.target.classList.contains('filterButton')) {
+                        return
+                    }
+                    handler(e);
+                };
+                document.addEventListener("mousedown", listener);
+                document.addEventListener("touchstart", listener);
+                return () => {
+                    document.removeEventListener("mousedown", listener);
+                    document.removeEventListener("touchstart", listener);
+                };
+            },
+            [isOpen, handler]
+        )
+    }
 
-    // useEffect(() => {
-    //     const handleClick = (e) => {
-    //         const isDropdownClicked = dropdownRef.current && dropdownRef.current.contains(e.target);
-    //         const isButtonClicked = buttonRef.current && buttonRef.current.contains(e.target);
-
-    //         if (isDropdownClicked || isButtonClicked) {
-    //             return
-    //         }
-    //         setFlavourOpen(false);
-    //     };
-
-    //     document.addEventListener('mousedown', handleClick);
-    //     document.addEventListen('touchstart', handleClick);
-
-    //     return () => {
-    //         document.removeEventListener('mousedown', handleClick);
-    //         document.removeEventListen('touchstart', handleClick)
-    //     }
-
-        
-    // }, [dropdownRef, buttonRef])
-    // console.log(flavours);
     const [flavourFilter, setFlavourFilter] = useState(flavours.map(flavour => ({
         "value": false,
         "name" : flavour
@@ -92,28 +83,21 @@ function FilterComponent({flavours, types, wines}) {
         } 
     }
     
-    // const [flavourSelection, setFlavourSelection] = useState('Flavour');
-
-    // const [foodTypeSelection, setFoodTypeSelection] = useState('Food Type');
-
-    // const [wineSelection, setWineSelection] = useState('Natural Wine?');
-
-    // const handleFilter = (e) => {
-    //     e.preventDefault();
-    //     // filterRestaurants()
-    // }
 
     return (
     <div className="filter">
 
-        <button onClick={() => {setFlavourOpen(!flavourOpen)}} className="filterButton">Flavours</button>
+        <button onClick={() => {setFlavourOpen(!flavourOpen)}} className={`filterButton ${flavourOpen ? "open" : null}`}>
+            Flavours
+            <div className={`arrow ${flavourOpen ? "open" : null}`}></div>
+            </button>
 
         {
             flavourOpen === true 
             ? <div className="options">
                 { flavourFilter.map((flavour) => {
                     return (
-                        <div className="checkboxContainer">
+                        <div key={`${flavour.name}Container`} className="checkboxContainer">
                             <Checkbox
                                 key={flavour.name + 1}
                                 id={flavour.name}
@@ -128,31 +112,21 @@ function FilterComponent({flavours, types, wines}) {
                     )
                 })
                 }
-                <button>Apply</button>
+                <button onClick={() => {setFlavourOpen(!setFlavourOpen)}}>Apply</button>
             </div> 
             : null
         }
         
-        {/* {flavourOpen 
-        ? <>
-        
-        <div ref={flavourDropRef} className="filterDropdown">
-            dropdown content goes here
-        </div>
-        <div className="filterDropdownActions"></div>
-        <button onClick={handleApply} className="filterDropdownButton">Apply</button>
-        </>
-
-        : null
-        } */}
-
-        <button onClick={() => {setTypeOpen(!typeOpen)}} className="filterButton">Food Types</button>
+        <button onClick={() => {setTypeOpen(!typeOpen)}} className={`filterButton ${typeOpen ? "open" : null}`}>
+            Food Types
+            <div className={`arrow ${typeOpen ? "open" : null}`}></div>
+            </button>
         {
             typeOpen === true 
             ? <div className="options">
                 { typeFilter.map((type) => {
                     return (
-                        <div className="checkboxContainer">
+                        <div key={`${type.name}Container`} className="checkboxContainer">
                             <Checkbox
                                 key={type.name + 1}
                                 id={type.name}
@@ -167,7 +141,7 @@ function FilterComponent({flavours, types, wines}) {
                     )
                 })
                 }
-                <button>Apply</button>
+                <button onClick={() => {setTypeOpen(!typeOpen)}}>Apply</button>
             </div>
             : null
         }
@@ -175,60 +149,6 @@ function FilterComponent({flavours, types, wines}) {
 
         <button onClick={() => {setWineOpen(!wineOpen)}} className="filterButton">Natural Wine?</button>
 
-        {/* <form className="filterContainer" onSubmit={handleFilter}>
-            <label className="sr-only" htmlFor="flavourSelection">Choose A Flavour</label>
-    
-                <select id ="flavourSelection"
-                    onChange={(e) => {setFlavourSelection(e.target.value)}}
-                    value={flavourSelection}
-                >
-                    <option value='Flavour'>Flavour - All</option>
-                    {flavourChoices.map(({value, label}) => (
-                        <option
-                        key={value}
-                        value={value}
-                        >
-                            {label}
-                        </option>
-                    ))}
-                </select>
-    
-            <label className="sr-only" htmlFor="foodTypeSelection">Choose a Type of Food</label>
-                <select id ="foodTypeSelection"
-                    onChange={(e) => {setFoodTypeSelection(e.target.value)}}
-                    value={foodTypeSelection}
-                >
-                    <option value='Food Type'>Food Type - All</option>
-                    {typeChoices.map(({value, label}) => (
-                        <option
-                        key={value}
-                        value={value}
-                        >
-                            {label}
-                        </option>
-                    ))}
-                </select>
-    
-                <label className="sr-only" htmlFor="wineSelection">Do you want Natural Wine?</label>
-                <select id="wineSelection"
-                    onChange={(e) => {setWineSelection(e.target.value)}}
-                    value={wineSelection}
-                >
-                    <option value='Natural Wine?'>Natural Wine? - All</option>
-                    {wineChoices.map(({value, label}) => (
-                        <option
-                        key={value}
-                        value={value}
-                        >
-                            {label}
-                        </option>
-                    ))}
-                </select>
-
-                <button>Search</button>
-        </form>
-
-        <a href="#form">add a restaurant</a> */}
     </div>
     
     )
