@@ -1,5 +1,5 @@
-// import Select from 'react-select'
-import {useState, useEffect} from 'react';
+import Dropdown from './Dropdown';
+import {useState, useEffect, useRef} from 'react';
 import Checkbox from './Checkbox';
 import _ from "lodash";
 
@@ -8,31 +8,6 @@ function FilterComponent({flavours, types, wines}) {
     const [flavourOpen, setFlavourOpen] = useState(false);
     const [typeOpen, setTypeOpen] = useState(false);
     const [wineOpen, setWineOpen] = useState(false);
-
-
-    useOnClickOutside(typeOpen, () => setTypeOpen(false));
-    useOnClickOutside(flavourOpen, () => setFlavourOpen(false));
-
-
-    function useOnClickOutside(isOpen, handler) {
-        useEffect (
-            () => {
-                const listener = (e) => {
-                    if (!isOpen || e.target.classList.contains('filterButton')) {
-                        return
-                    }
-                    handler(e);
-                };
-                document.addEventListener("mousedown", listener);
-                document.addEventListener("touchstart", listener);
-                return () => {
-                    document.removeEventListener("mousedown", listener);
-                    document.removeEventListener("touchstart", listener);
-                };
-            },
-            [isOpen, handler]
-        )
-    }
 
     const [flavourFilter, setFlavourFilter] = useState(flavours.map(flavour => ({
         "value": false,
@@ -86,71 +61,55 @@ function FilterComponent({flavours, types, wines}) {
 
     return (
     <div className="filter">
+        <Dropdown 
+            title='Flavours'
+            // items={flavourFilter}
 
-        <button onClick={() => {setFlavourOpen(!flavourOpen)}} className={`filterButton ${flavourOpen ? "open" : null}`}>
-            Flavours
-            <div className={`arrow ${flavourOpen ? "open" : null}`}></div>
-            </button>
-
-        {
-            flavourOpen === true 
-            ? <div className="options">
-                { flavourFilter.map((flavour) => {
-                    return (
-                        <div key={`${flavour.name}Container`} className="checkboxContainer">
+            listItems={flavourFilter.map(flavour => (
+                        <li 
+                        className="checkboxContainer"
+                        key={`${flavour.name}+Container`}
+                        >
                             <Checkbox
                                 key={flavour.name + 1}
                                 id={flavour.name}
-                                name={'flavourFilter'}
+                                name='flavourFilter'
                                 checked={flavour.value}
                                 onChange={handleChoice}
                                 value={flavour.name}
                                 text={flavour.name}
                                 htmlFor={flavour.name}
                             />
-                        </div>
-                    )
-                })
-                }
-                <button onClick={() => {setFlavourOpen(!setFlavourOpen)}}>Apply</button>
-            </div> 
-            : null
-        }
-        
-        <button onClick={() => {setTypeOpen(!typeOpen)}} className={`filterButton ${typeOpen ? "open" : null}`}>
-            Food Types
-            <div className={`arrow ${typeOpen ? "open" : null}`}></div>
-            </button>
-        {
-            typeOpen === true 
-            ? <div className="options">
-                { typeFilter.map((type) => {
-                    return (
-                        <div key={`${type.name}Container`} className="checkboxContainer">
+                        </li>
+                    ))}
+            buttonText='Apply'
+
+        />
+        <Dropdown 
+            title='Types Of Food'
+
+            listItems={typeFilter.map(type => (
+                        <li 
+                        className="checkboxContainer"
+                        key={`${type.name}+Container`}
+                        >
                             <Checkbox
                                 key={type.name + 1}
                                 id={type.name}
-                                name={'typeFilter'}
+                                name='typeFilter'
                                 checked={type.value}
                                 onChange={handleChoice}
                                 value={type.name}
                                 text={type.name}
                                 htmlFor={type.name}
                             />
-                        </div>
-                    )
-                })
-                }
-                <button onClick={() => {setTypeOpen(!typeOpen)}}>Apply</button>
-            </div>
-            : null
-        }
-        
+                        </li>
+                    ))}
+            buttonText='Apply'
 
-        <button onClick={() => {setWineOpen(!wineOpen)}} className="filterButton">Natural Wine?</button>
+        />
 
     </div>
-    
     )
 } 
 
