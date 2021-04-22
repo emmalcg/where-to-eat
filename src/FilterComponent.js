@@ -1,14 +1,20 @@
 import Dropdown from './Dropdown';
-import {useState, useEffect, useRef} from 'react';
+import {useState} from 'react';
 import Checkbox from './Checkbox';
 import _ from "lodash";
+import DeleteButton from './DeleteButton';
 
 function FilterComponent({flavours, types, wines}) {
 
-    const [flavourOpen, setFlavourOpen] = useState(false);
-    const [typeOpen, setTypeOpen] = useState(false);
-    const [wineOpen, setWineOpen] = useState(false);
+    const [filteredFlavourList, setFilteredFlavourList] = useState([]);
+    const [filteredTypeList, setFilteredTypeList] = useState([])
 
+    const [allFiltered, setAllFiltered] = useState([])
+
+    console.log(allFiltered);
+    if (allFiltered > 0 ) {
+        console.log(true)
+    }
     const [flavourFilter, setFlavourFilter] = useState(flavours.map(flavour => ({
         "value": false,
         "name" : flavour
@@ -58,14 +64,40 @@ function FilterComponent({flavours, types, wines}) {
         } 
     }
     
+    const handleFilter = () => {
+
+        const filteredFlavours = flavourFilter.filter((flavour) => {
+            return flavour.value === true;
+        }).map((flavour) => {
+            return flavour.name
+        })
+
+        const filteredTypes = typeFilter.filter((type) => {
+            return type.value === true;
+        }).map((type) => {
+            return type.name
+        })
+
+        const all = filteredFlavours.concat(filteredTypes)
+        
+        setFilteredFlavourList(filteredFlavours);
+        setFilteredTypeList(filteredTypes);
+
+        setAllFiltered(all);
+
+    }
+
+
 
     return (
     <div className="filter">
         <Dropdown 
             title='Flavours'
-            // items={flavourFilter}
-
-            listItems={flavourFilter.map(flavour => (
+            onClick={handleFilter}
+            buttonText='Apply'
+            listItems={
+                <>
+                {flavourFilter.map(flavour => (
                         <li 
                         className="checkboxContainer"
                         key={`${flavour.name}+Container`}
@@ -82,33 +114,49 @@ function FilterComponent({flavours, types, wines}) {
                             />
                         </li>
                     ))}
-            buttonText='Apply'
+                    
+                    {/* <button onClick={handleFilter}>Apply</button> */}
+                </>
+                }
 
         />
+
         <Dropdown 
             title='Types Of Food'
-
-            listItems={typeFilter.map(type => (
-                        <li 
-                        className="checkboxContainer"
-                        key={`${type.name}+Container`}
-                        >
-                            <Checkbox
-                                key={type.name + 1}
-                                id={type.name}
-                                name='typeFilter'
-                                checked={type.value}
-                                onChange={handleChoice}
-                                value={type.name}
-                                text={type.name}
-                                htmlFor={type.name}
-                            />
-                        </li>
-                    ))}
+            onClick={handleFilter}
             buttonText='Apply'
-
+            listItems={
+                    <>
+                    {typeFilter.map(type => (
+                            <li 
+                            className="checkboxContainer"
+                            key={`${type.name}+Container`}
+                            >
+                                <Checkbox
+                                    key={type.name + 1}
+                                    id={type.name}
+                                    name='typeFilter'
+                                    checked={type.value}
+                                    onChange={handleChoice}
+                                    value={type.name}
+                                    text={type.name}
+                                    htmlFor={type.name}
+                                />
+                            </li>
+                        ))
+                    }
+                    {/* <button onClick={handleFilter}>Apply</button> */}
+                    </>
+                }
         />
 
+        
+        {
+            
+            allFiltered.map(item => {
+                <p>{item}</p>
+            })
+        }
     </div>
     )
 } 

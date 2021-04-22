@@ -2,13 +2,14 @@ import {useState, useRef} from 'react';
 import { useEffect } from 'react/cjs/react.development';
 
 
-function Dropdown ({title, listItems, buttonText}) {
+function Dropdown ({title, listItems, buttonText, onClick}) {
     const [open, setOpen] = useState(false);
-    const toggle = () => setOpen(!open);
+    const toggle = () => {
+        setOpen(!open);
+    }
+    
 
     const handleClickOutside = (e) => {
-        console.log(e.target)
-        console.log(ref.current)
         if (ref.current && !ref.current.contains(e.target) ) {
             setOpen(false)
         } 
@@ -37,11 +38,11 @@ function Dropdown ({title, listItems, buttonText}) {
                 <ul className="dd-options">
                     {listItems=listItems}
 
-                    <button onClick={toggle}>{buttonText}</button>
+                    <button onClick={onClick}>{buttonText}</button>
                 </ul>
             )}
 
-    
+            
         </div>
     )
 }

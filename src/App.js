@@ -7,6 +7,8 @@ import FilterComponent from './FilterComponent.js';
 import Form from './Form.js';
 import Footer from './Footer.js'
 
+
+
 function App() {
   const flavours = [
     'sour',
@@ -33,6 +35,7 @@ function App() {
     'show me the wine!',
     'no wine'
   ]
+  
   const [restaurants, setRestaurants] = useState([]);
   
     useEffect(() => {
