@@ -4,7 +4,33 @@ import Checkbox from './Checkbox';
 import _ from "lodash";
 import DeleteButton from './DeleteButton';
 
-function FilterComponent({flavours, types, wines}) {
+function FilterComponent() {
+
+    const flavours = [
+        'sour',
+        'refreshing',
+        'savory',
+        'spicy',
+        'sweet'
+    ]
+    const types = [
+        'snacks',
+        'vegetables',
+        'soup',
+        'BBQ',
+        'noodles',
+        'burger',
+        'pizza',
+        'meat',
+        'dessert',
+        'dumplings',
+        'sandwich',
+        'seafood'
+    ]
+    const wines = [
+        'show me the wine!',
+        'no wine'
+    ]
 
     const [filteredFlavourList, setFilteredFlavourList] = useState([]);
     const [filteredTypeList, setFilteredTypeList] = useState([])
