@@ -2,7 +2,7 @@ import {useState, useRef} from 'react';
 import { useEffect } from 'react/cjs/react.development';
 
 
-function Dropdown ({title, listItems, buttonText, onClick}) {
+function Dropdown ({title, listItems}) {
     const [open, setOpen] = useState(false);
     const toggle = () => {
         setOpen(!open);
@@ -26,7 +26,7 @@ function Dropdown ({title, listItems, buttonText, onClick}) {
     }, []);
 
     return (
-        <div ref={ref} className="dd-wrapper">
+        <div ref={ref} className="ddWrapper">
             <button
                 className={`filterButton ${open && "open"}`}
                 onClick={toggle}
@@ -35,14 +35,12 @@ function Dropdown ({title, listItems, buttonText, onClick}) {
                 <div className={`arrow ${open && "open"}`}></div>
             </button>
             {open && (
-                <ul className="dd-options">
+                <ul className="ddOptions">
                     {listItems=listItems}
 
-                    <button onClick={onClick}>{buttonText}</button>
+                    <button onClick={toggle}>Close</button>
                 </ul>
             )}
-
-            
         </div>
     )
 }
