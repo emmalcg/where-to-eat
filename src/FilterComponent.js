@@ -37,10 +37,6 @@ function FilterComponent() {
 
     const [allFiltered, setAllFiltered] = useState([])
 
-    console.log(allFiltered);
-    if (allFiltered > 0 ) {
-        console.log(true)
-    }
     const [flavourFilter, setFlavourFilter] = useState(flavours.map(flavour => ({
         "value": false,
         "name" : flavour
@@ -113,76 +109,106 @@ function FilterComponent() {
 
     }
 
+    const deleteItem = (e) => {
+        const updatedFiltered = allFiltered.filter((item) => {
+            return item !== e.target.value
+        })
+        setAllFiltered(updatedFiltered)
 
+        
+
+    }
+    console.log('state', allFiltered)
+
+    const resetFilter = () => {
+        setAllFiltered([]);
+        setFlavourFilter(flavours.map(flavour => ({
+        "value": false,
+        "name" : flavour
+        })))
+        setTypeFilter((types.map(type => ({
+        "value" : false,
+        "name" : type
+        }))))
+    }
 
     return (
     <div className="filter">
-        <Dropdown 
-            title='Flavours'
-            onClick={handleFilter}
-            buttonText='Apply'
-            listItems={
-                <>
-                {flavourFilter.map(flavour => (
-                        <li 
-                        className="checkboxContainer"
-                        key={`${flavour.name}+Container`}
-                        >
-                            <Checkbox
-                                key={flavour.name + 1}
-                                id={flavour.name}
-                                name='flavourFilter'
-                                checked={flavour.value}
-                                onChange={handleChoice}
-                                value={flavour.name}
-                                text={flavour.name}
-                                htmlFor={flavour.name}
-                            />
-                        </li>
-                    ))}
-                    
-                    {/* <button onClick={handleFilter}>Apply</button> */}
-                </>
-                }
-
-        />
-
-        <Dropdown 
-            title='Types Of Food'
-            onClick={handleFilter}
-            buttonText='Apply'
-            listItems={
+        <div className={`dropdownContainer ${allFiltered.length > 0 && "buttons"}`}>
+            <Dropdown 
+                title='Flavours'
+                onClick={handleFilter}
+                buttonText='Apply'
+                listItems={
                     <>
-                    {typeFilter.map(type => (
+                    {flavourFilter.map(flavour => (
                             <li 
                             className="checkboxContainer"
-                            key={`${type.name}+Container`}
+                            key={`${flavour.name}Container`}
                             >
                                 <Checkbox
-                                    key={type.name + 1}
-                                    id={type.name}
-                                    name='typeFilter'
-                                    checked={type.value}
+                                    key={`${flavour.name}1`}
+                                    id={flavour.name}
+                                    name='flavourFilter'
+                                    checked={flavour.value}
                                     onChange={handleChoice}
-                                    value={type.name}
-                                    text={type.name}
-                                    htmlFor={type.name}
+                                    value={flavour.name}
+                                    text={flavour.name}
+                                    htmlFor={flavour.name}
                                 />
                             </li>
-                        ))
-                    }
-                    {/* <button onClick={handleFilter}>Apply</button> */}
+                        ))}
+                        
+                        {/* <button onClick={handleFilter}>Apply</button> */}
                     </>
-                }
-        />
+                    }
 
-        
+            />
+
+            <Dropdown 
+                title='Types Of Food'
+                onClick={handleFilter}
+                buttonText='Apply'
+                listItems={
+                        <>
+                        {typeFilter.map(type => (
+                                <li 
+                                className="checkboxContainer"
+                                key={`${type.name}Container`}
+                                >
+                                    <Checkbox
+                                        key={`${type.name}1`}
+                                        id={type.name}
+                                        name='typeFilter'
+                                        checked={type.value}
+                                        onChange={handleChoice}
+                                        value={type.name}
+                                        text={type.name}
+                                        htmlFor={type.name}
+                                    />
+                                </li>
+                            ))
+                        }
+                        {/* <button onClick={handleFilter}>Apply</button> */}
+                        </>
+                    }
+            />
+        </div>
         {
-            
-            allFiltered.map(item => {
-                <p>{item}</p>
-            })
+            allFiltered.length > 0 &&
+
+            <div className="deleteContainer">
+                {
+                    allFiltered.map(item => {
+                        return (
+                            <DeleteButton key={`${item}Button`} item={item} onClick={deleteItem}/>
+                        )
+                    })
+                }
+                <button className="clearAll deleteButton" onClick={resetFilter}>Clear All</button>
+            </div>
         }
+
     </div>
     )
 } 
