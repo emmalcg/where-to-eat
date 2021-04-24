@@ -1,10 +1,22 @@
-import firebase from './firebase.js';
-import React, { useEffect, useContext } from 'react';
-import RestaurantCard from './RestaurantCard.js';
-import {RestaurantContext} from './RestaurantContext';
+import styled from 'styled-components';
+import firebase from '../firebase';
+import React, { useState, useEffect, useContext } from 'react';
+import RestaurantCard from './RestaurantCard';
+import {RestaurantContext} from '../context/RestaurantContext';
+import {FilterContext} from '../context/FilterContext';
+
+const UlStyles = styled.ul`
+    margin-top: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    grid-gap: 2rem;
+`
+
 function RestaurantList() {
+    const [restaurantData, setRestaurantData] = useState([])
     const [restaurants, setRestaurants] = useContext(RestaurantContext)
-    // const [restaurants, setRestaurants] = useState([]);
+    const [filter] = useContext(FilterContext);
 
     useEffect(() => {
         const dbRef = firebase.database().ref();
@@ -43,14 +55,37 @@ function RestaurantList() {
 
         restaurantList.sort(sort("name"));
 
+        setRestaurantData(restaurantList)
+
         setRestaurants(restaurantList);
 
         })
     }, [])
 
+    // useEffect(() => {
+
+    //     if(filter.length > 0) {
+    
+    //         const filteredRest = restaurants.filter(rest => {
+    //             for(let i = 0; i < filter.length; i++) {
+    //                 if (rest.flavours.includes(filter[i]) || rest.foodTypes.includes(filter[i])) {
+    //                     return rest
+    //                 }
+    //             }
+    //         })        
+    //         console.log(filteredRest)
+    //         setRestaurants(filteredRest)
+
+            
+
+    //     } else {
+    //         setRestaurants(restaurantData)
+    //     }
+
+    // },[filter.length])
 
     return (
-        <ul className="restaurantContainer">
+        <UlStyles>
             {restaurants.map((restaurant) => {
                 return (
                 <RestaurantCard
@@ -60,7 +95,7 @@ function RestaurantList() {
                 )
             })}
 
-        </ul>
+        </UlStyles>
     )
 }
 

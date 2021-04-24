@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import Checkbox from './Checkbox.js';
-import firebase from './firebase.js';
+import Checkbox from './Checkbox';
+import firebase from '../firebase';
 import _ from "lodash";
+import { AddRestaurantForm } from '../components/styles/AddFormStyles'
 
-function Form() {
+function AddForm() {
 
     const [restaurantName , setRestaurantName] = useState('');
     
@@ -139,7 +140,7 @@ function Form() {
     }
 
     return (
-            <form className="restaurantAdd" id="form" onSubmit={handleSubmit}>
+            <AddRestaurantForm id="form" onSubmit={handleSubmit}>
                 <div className="formTitle">
                     <legend>add a restaurant</legend>
                 </div>
@@ -234,8 +235,8 @@ function Form() {
                 </fieldset>
 
                 <button type="submit">submit</button>
-            </form>
+            </AddRestaurantForm>
     )
 }
 
-export default Form;
+export default AddForm;
