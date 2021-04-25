@@ -5,12 +5,31 @@ import RestaurantCard from './RestaurantCard';
 import {RestaurantContext} from '../context/RestaurantContext';
 import {FilterContext} from '../context/FilterContext';
 
+const DivContainer = styled.div`
+    position: relative
+`
 const UlStyles = styled.ul`
     margin-top: 20px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     grid-gap: 2rem;
+`
+const AddLink = styled.a`
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    position: absolute;
+    right: 0;
+    top: -3.5rem;
+    background-color:var(--lightened-background);
+    transition: background-color 0.3s ease;
+    padding: 0.5rem;
+    border: 1px solid var(--main-text-color);
+
+    &:hover,
+    &:focus {
+        background-color #DCFFFA
+    }
 `
 
 function RestaurantList() {
@@ -85,17 +104,20 @@ function RestaurantList() {
     // },[filter.length])
 
     return (
-        <UlStyles>
-            {restaurants.map((restaurant) => {
-                return (
-                <RestaurantCard
-                    key={restaurant.uniqueKey}
-                    restaurant={restaurant}
-                />
-                )
-            })}
+        <DivContainer>
+            <AddLink href="#form">Add a Restaurant</AddLink>
+            <UlStyles>
+                {restaurants.map((restaurant) => {
+                    return (
+                    <RestaurantCard
+                        key={restaurant.uniqueKey}
+                        restaurant={restaurant}
+                    />
+                    )
+                })}
 
-        </UlStyles>
+            </UlStyles>
+        </DivContainer>
     )
 }
 

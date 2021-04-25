@@ -24,12 +24,13 @@ const Heading = styled.header`
     }
 `;
 
+
+
 function Header() {
     return(
         <Heading id ="header">
             <Marquee text="Favourite places in Toronto" />
             <h1>where to eat</h1>
-        
         </Heading>
     )
 }
