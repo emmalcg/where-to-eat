@@ -132,8 +132,7 @@ function Dropdown ({title, listItems}) {
             </FilterButton>
             {open && (
                 <DropdownList>
-                    {listItems=listItems}
-
+                    {listItems}
                     <CloseButton onClick={toggle}>Close</CloseButton>
                 </DropdownList>
             )}

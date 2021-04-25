@@ -37,7 +37,7 @@ const MenuOpen = styled.div `
 `
 const slider = <FontAwesomeIcon icon={faSlidersH} />
 
-function MobileFilter ({title, listItems}) {
+function MobileFilter ({listItems}) {
     const [open, setOpen] = useState(false)
 
     const openFilterMenu = (e) => {

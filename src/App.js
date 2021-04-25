@@ -9,7 +9,6 @@ import FilterComponent from './components/FilterComponent';
 import RestaurantList from './components/RestaurantList'
 import AddForm from './components/AddForm';
 import Footer from './components/Footer'
-import MobileFilter from './components/MobileFilter';
 
 function App() {
 

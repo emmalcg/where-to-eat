@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Foot = styled.footer`
+const FooterStyled= styled.footer`
     margin-top: auto;
     text-align: center;
 
@@ -26,9 +26,9 @@ const Foot = styled.footer`
 
 function Footer() {
     return (
-        <footer>
+        <FooterStyled> 
             <a href="#header">to top</a>
-        </footer>
+        </FooterStyled>
     )
 }
 
