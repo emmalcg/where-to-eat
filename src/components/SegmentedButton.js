@@ -11,11 +11,13 @@ const Radio = styled.input`
     height: 0px; 
 
 
-    :focus + label {
+    &:focus + label {
         text-decoration: underline;
+        background-color: blue;
     }
+    
 
-    :checked + label {
+    &:checked + label {
         background-color: var(--dark-secondary-color);
         outline: 2px solid var(--main-text-color);
         text-decoration: none;
@@ -33,6 +35,8 @@ const Label = styled.label`
     text-transform: uppercase;
     position: relative;
     top: 1.3rem;
+
+    cursor: pointer;
 `
 
 function SegmentedButton(props) {

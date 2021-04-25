@@ -54,28 +54,34 @@ const ClearAll = styled.button`
     background: transparent;
     border: none;
     outline: 1px solid transparent;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 900;
     margin: 0 0 0 2rem;
-    padding: 0;
+    padding: 0px;
     transition: all 0.5s ease;
 
     min-width: 9rem;
-    max-height: 2rem;
+    height: 1.8rem;
+    
 
 
     &:hover {
-        color: var(--bright-contrast)
+        color: var(--bright-contrast);
     }
 
     &:focus {
-        color: var(--bright-contrast)
+        color: var(--bright-contrast);
+        outline: 1px solid var(--bright-contrast);
     }
 `
 
 const RefineBy = styled.p`
     text-transform: uppercase;
     font-size: 1.6rem;
-    font-weight: 800;
+    font-weight: 900;
+    font-style: italic;
     margin-right: 2rem;
     min-width: 8rem;
 
@@ -160,7 +166,8 @@ const MobileDelete = styled.div`
 `
 const SubHeading = styled.h3`
     font-size: 1.6rem;
-    font-weight: 800;
+    font-weight: 900;
+    font-style: italic;
     margin: 3rem 0 1.5rem;
     text-transform: uppercase;
 `

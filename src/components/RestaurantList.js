@@ -4,6 +4,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import RestaurantCard from './RestaurantCard';
 import {RestaurantContext} from '../context/RestaurantContext';
 import {FilterContext} from '../context/FilterContext';
+import {WineFilterContext} from '../context/WineFilterContext';
+import { filter } from 'lodash';
+
 
 const DivContainer = styled.div`
     position: relative
@@ -35,23 +38,25 @@ const AddLink = styled.a`
 function RestaurantList() {
     const [restaurantData, setRestaurantData] = useState([])
     const [restaurants, setRestaurants] = useContext(RestaurantContext)
+    const [wineFilter] =useContext(WineFilterContext)
     const [filter] = useContext(FilterContext);
+
 
     useEffect(() => {
         const dbRef = firebase.database().ref();
         
         dbRef.on('value', (data) => {
-        const restaurantData = data.val();
+        const firebaseData = data.val();
 
         const restaurantList = [];
 
-        for (let restaurantKey in restaurantData) {
+        for (let restaurantKey in firebaseData) {
             restaurantList.push({
             uniqueKey: restaurantKey,
-            name: restaurantData[restaurantKey].name,
-            wine: restaurantData[restaurantKey].wine,
-            flavours: restaurantData[restaurantKey].flavours,
-            foodTypes: restaurantData[restaurantKey].foodTypes,
+            name: firebaseData[restaurantKey].name,
+            wine: firebaseData[restaurantKey].wine,
+            flavours: firebaseData[restaurantKey].flavours,
+            foodTypes: firebaseData[restaurantKey].foodTypes,
             })
         }
         
@@ -81,27 +86,62 @@ function RestaurantList() {
         })
     }, [])
 
-    // useEffect(() => {
+    useEffect(() => {
+        if(wineFilter === 'wineOnly') {
+            const filteredRest = restaurants.filter(rest => {
+                if(rest.wine === true) {
+                    return rest
+                }
+            })
+            setRestaurants(filteredRest)
+        } else {
+            setRestaurants(restaurantData)
+        }
+    },[wineFilter])
 
-    //     if(filter.length > 0) {
+    useEffect(() => {
+
+        if(filter.length > 0) {
     
-    //         const filteredRest = restaurants.filter(rest => {
-    //             for(let i = 0; i < filter.length; i++) {
-    //                 if (rest.flavours.includes(filter[i]) || rest.foodTypes.includes(filter[i])) {
+            const filteredRest = restaurants.filter(rest => {
+                for(let i = 0; i < filter.length; i++) {
+                    if (rest.flavours.includes(filter[i])) {
+                        return rest
+                    }
+                }
+                for(let i = 0; i < filter.length; i++) {
+                    if (rest.foodTypes.includes(filter[i])){
+                        return rest
+                    }
+                }
+            })        
+            console.log(filteredRest)
+            setRestaurants(filteredRest)
+        } else {
+            setRestaurants(restaurantData)
+        }
+
+    },[filter.length])
+
+    // const [state, dispatch] = useReducer((state, action) => {
+
+    //     switch(action.type) {
+    //         case 'SOUR': {
+    //             restaurants.filter(rest => {
+    //                 if (rest.flavours.includes('sour')) {
     //                     return rest
     //                 }
-    //             }
-    //         })        
-    //         console.log(filteredRest)
-    //         setRestaurants(filteredRest)
-
-            
-
-    //     } else {
-    //         setRestaurants(restaurantData)
+    //             })
+    //         }
+    //         case 'REFRESHING': {
+    //             restaurants.filter(rest => {
+    //                 if (rest.flavours.includes('refreshing')) {
+    //                     return rest
+    //                 }
+    //             })
+    //         }
     //     }
-
-    // },[filter.length])
+    // })
 
     return (
         <DivContainer>

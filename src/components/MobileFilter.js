@@ -34,6 +34,11 @@ const MenuOpen = styled.div `
     border-top: 1px solid var(--main-text-color);
     z-index: 3;
     padding: 1rem;
+
+    display: none;
+    @media (max-width: 740px) {
+        display: block;
+    }
 `
 const slider = <FontAwesomeIcon icon={faSlidersH} />
 

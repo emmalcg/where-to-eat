@@ -7,31 +7,39 @@ import {FilterContext} from '../context/FilterContext';
 import {WineFilterContext} from '../context/WineFilterContext';
 import SegmentedButton from './SegmentedButton'
 import MobileFilter from './MobileFilter';
+import {RestaurantContext} from '../context/RestaurantContext';
+import StateManager from 'react-select';
 
 function FilterComponent() {
     const [filter, setFilter] = useContext(FilterContext)
     const [wineFilter, setWineFilter] = useContext(WineFilterContext)
 
+    // const [sour, setSour] = useState(false)
+    // const [refreshing, setRefreshing] = useState(false)
+    // const [savory, setSavory] = useState(false)
+    // const [spicy, setSpicy] = useState(false)
+    // const [sweet, setSweet] = useState(false)
+
     const flavours = [
-        'Sour',
-        'Refreshing',
-        'Savory',
-        'Spicy',
-        'Sweet'
+        'sour',
+        'refreshing',
+        'savory',
+        'spicy',
+        'sweet'
     ]
     const types = [
-        'Snacks',
-        'Vegetables',
-        'Soup',
+        'snacks',
+        'vegetables',
+        'soup',
         'BBQ',
-        'Noodles',
-        'Burger',
-        'Pizza',
-        'Meat',
-        'Dessert',
-        'Dumplings',
-        'Sandwich',
-        'Seafood'
+        'noodles',
+        'burger',
+        'pizza',
+        'meat',
+        'dessert',
+        'dumplings',
+        'sandwich',
+        'seafood'
     ]
     const wines = [
         'show me the wine!',
@@ -63,7 +71,7 @@ function FilterComponent() {
     })
 
     const filteredList = filteredFlavourStrings.concat(filteredTypeStrings)
-
+    console.log(filteredList)
 
     useEffect(() => {
         setFilter(filteredList)
@@ -73,6 +81,8 @@ function FilterComponent() {
 
     //checkbox handling 
     const handleChoice = (e) => {
+
+
         const choice = e.target.value;
         const group = e.target.name;
         
@@ -103,9 +113,6 @@ function FilterComponent() {
 
             setTypeFilter(checkedTypeFilter);
         } 
-
-        
-
     }
 
     // "Clear All" button 
