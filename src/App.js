@@ -1,6 +1,6 @@
-import './App.css';
+// import './App.css';
 
-// import { useEffect, useState } from 'react';
+import { GlobalStyles } from './components/styles/GlobalStyles';
 import {RestaurantProvider} from './context/RestaurantContext';
 import {FilterProvider} from './context/FilterContext';
 import {WineFilterProvider} from './context/WineFilterContext';
@@ -16,7 +16,7 @@ function App() {
   return (
     
     <div>
-      <MobileFilter />
+      <GlobalStyles />
       <Header />
       <div className="wrapper">
         <main>

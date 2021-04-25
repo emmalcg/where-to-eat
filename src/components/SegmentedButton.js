@@ -17,7 +17,9 @@ const Radio = styled.input`
 
     :checked + label {
         background-color: var(--dark-secondary-color);
+        outline: 2px solid var(--main-text-color);
         text-decoration: none;
+        z-index: 1;
     }
 `
 
@@ -26,7 +28,7 @@ const Label = styled.label`
     outline: 1px solid var(--main-text-color);
     text-align: center;
     background-color: var(--lightened-background);
-    transition: all 0.8s ease;
+    transition: background-color 0.3s ease;
     padding: 0.5rem 1rem;
     text-transform: uppercase;
     position: relative;

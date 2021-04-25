@@ -1,4 +1,4 @@
-import {FilterContainer, DropdownContainer, CheckboxContainer, DeleteContainer, DeleteButton} from './styles/FilterStyles'
+import {FilterContainer, DropdownContainer, CheckboxContainer, DeleteContainer, DeleteButton, RefineHeader, ClearAll, RefineBy, MobileDelete, SubHeading, MobileUl} from './styles/FilterStyles'
 import Dropdown from './Dropdown';
 import {useState, useContext, useEffect} from 'react';
 import Checkbox from './Checkbox';
@@ -6,6 +6,7 @@ import _, { forEach } from "lodash";
 import {FilterContext} from '../context/FilterContext';
 import {WineFilterContext} from '../context/WineFilterContext';
 import SegmentedButton from './SegmentedButton'
+import MobileFilter from './MobileFilter';
 
 function FilterComponent() {
     const [filter, setFilter] = useContext(FilterContext)
@@ -246,6 +247,112 @@ function FilterComponent() {
     return (
     <form >
         <FilterContainer> 
+            <MobileFilter 
+                listItems={
+                    <>
+                    {
+                    filteredList.length > 0 &&
+                    
+                    <MobileDelete>
+                        <RefineHeader>
+                            <RefineBy>Refine By</RefineBy>
+                            <ClearAll onClick={resetFilter}>Clear All</ClearAll>
+                        </RefineHeader>
+                        <ul>
+                            {
+                                flavourFilter.filter(flavour => {
+                                    return flavour.value === true
+                                })
+                                .map(flavour => {
+                                    return (
+                                        <DeleteButton
+                                            key={`${flavour.name}Delete`}
+                                            >
+                                                <Checkbox
+                                                    key={`${flavour.name}DeleteButton`}
+                                                    id={flavour.name}
+                                                    name='flavourFilter'
+                                                    checked={flavour.value}
+                                                    onChange={handleChoice}
+                                                    value={flavour.name}
+                                                    text={flavour.name}
+                                                    htmlFor={flavour.name}
+                                                />
+                                        </DeleteButton>
+                                    )
+                                }) 
+                            }
+
+                            {
+                                typeFilter.filter(type => {
+                                    return type.value === true
+                                })
+                                .map(type => {
+                                    return (
+                                        <DeleteButton
+                                            key={`${type.name}Delete`}
+                                            >
+                                                <Checkbox
+                                                    key={`${type.name}DeleteButton`}
+                                                    id={type.name}
+                                                    name='typeFilter'
+                                                    checked={type.value}
+                                                    onChange={handleChoice}
+                                                    value={type.name}
+                                                    text={type.name}
+                                                    htmlFor={type.name}
+                                                />
+                                        </DeleteButton>
+                                    )
+                                }) 
+                            }
+                        </ul>
+                    </MobileDelete>
+                    }
+                        <SubHeading>Flavours</SubHeading>
+                            <MobileUl>
+                            {flavourFilter.map(flavour => (
+                                    <CheckboxContainer
+                                    key={`${flavour.name}Container`}
+                                    >
+                                        <Checkbox
+                                            key={`${flavour.name}1`}
+                                            id={flavour.name}
+                                            name='flavourFilter'
+                                            checked={flavour.value}
+                                            onChange={handleChoice}
+                                            value={flavour.name}
+                                            text={flavour.name}
+                                            htmlFor={flavour.name}
+                                        />
+                                    </CheckboxContainer>
+                                ))}
+                            </MobileUl>
+                            <SubHeading>Food Types</SubHeading>
+                            <MobileUl>
+                            {typeFilter.map(type => (
+                                    <CheckboxContainer
+                                    key={`${type.name}Container`}
+                                    >
+                                        <Checkbox
+                                            key={`${type.name}1`}
+                                            id={type.name}
+                                            name='typeFilter'
+                                            checked={type.value}
+                                            onChange={handleChoice}
+                                            value={type.name}
+                                            text={type.name}
+                                            htmlFor={type.name}
+                                        />
+                                    </CheckboxContainer>
+                                ))
+                            }
+                            </MobileUl>
+                        </>
+                }
+            
+            
+            />
             <DropdownContainer className={filteredList.length > 0 && "buttons"}>
                 <Dropdown 
                     title='Flavours'
@@ -318,7 +425,7 @@ function FilterComponent() {
             filteredList.length > 0 &&
             
             <DeleteContainer>
-                <p>Refine By</p>
+                <RefineBy>Refine By</RefineBy>
                 <ul>
                     {
                         flavourFilter.filter(flavour => {
@@ -368,7 +475,7 @@ function FilterComponent() {
                         }) 
                     }
                 </ul>
-                <button className="clearAll" onClick={resetFilter}>Clear All</button>
+                <ClearAll onClick={resetFilter}>Clear All</ClearAll>
             </DeleteContainer>
         }
 

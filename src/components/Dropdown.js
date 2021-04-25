@@ -42,6 +42,10 @@ const FilterButton = styled.button`
         border-bottom: 2px solid transparent;
     }
 
+    @media (max-width: 740px) {
+        display: none;
+    }
+
 `;
 const Arrow = styled.div`
     width: 0; 
@@ -90,6 +94,7 @@ const CloseButton = styled.button`
     &:focus {
         background-color: var(--dark-secondary-color);
     }
+
 `
 
 function Dropdown ({title, listItems}) {
