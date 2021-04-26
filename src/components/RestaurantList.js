@@ -3,9 +3,8 @@ import firebase from '../firebase';
 import React, { useState, useEffect, useContext } from 'react';
 import RestaurantCard from './RestaurantCard';
 import {RestaurantContext} from '../context/RestaurantContext';
-import {FilterContext} from '../context/FilterContext';
 import {WineFilterContext} from '../context/WineFilterContext';
-import { filter } from 'lodash';
+import {FilterContext} from '../context/FilterContext';
 
 
 const DivContainer = styled.div`
@@ -40,6 +39,9 @@ function RestaurantList() {
     const [restaurants, setRestaurants] = useContext(RestaurantContext)
     const [wineFilter] =useContext(WineFilterContext)
     const [filter] = useContext(FilterContext);
+
+
+
 
 
     useEffect(() => {
@@ -82,66 +84,63 @@ function RestaurantList() {
         setRestaurantData(restaurantList)
 
         setRestaurants(restaurantList);
+    })
 
-        })
+
     }, [])
 
     useEffect(() => {
-        if(wineFilter === 'wineOnly') {
-            const filteredRest = restaurants.filter(rest => {
+
+        if (filter.length > 0 && wineFilter === 'allRest') {
+            const filteredRest = restaurantData.filter(rest => {
+                let matchesFilter = false
+                for(let i = 0; i < filter.length; i++) {
+                    if (rest.flavours.includes(filter[i]) || rest.foodTypes.includes(filter[i])) {
+                    matchesFilter = true
+                    }
+                }
+                return matchesFilter
+            })
+
+            setRestaurants(filteredRest)
+            
+        } if(filter.length > 0 && wineFilter === 'wineOnly') {
+
+            console.log('filter', filter);
+
+            const filteredRest = restaurantData.filter(rest => {
+                let matchesFilter = false
+                for(let i = 0; i < filter.length; i++) {
+                    if (rest.flavours.includes(filter[i]) || rest.foodTypes.includes(filter[i])) {
+                    matchesFilter = true
+                    }
+                }
+                return matchesFilter
+            }).filter(rest => {
+                if (rest.wine === true) {
+                    return rest
+                }
+            })
+
+            setRestaurants(filteredRest)
+
+        } if (filter.length === 0 && wineFilter === 'wineOnly') {
+            const filteredRest = restaurantData.filter(rest => {
                 if(rest.wine === true) {
                     return rest
                 }
             })
             setRestaurants(filteredRest)
-        } else {
-            setRestaurants(restaurantData)
-        }
-    },[wineFilter])
 
-    useEffect(() => {
-
-        if(filter.length > 0) {
-    
-            const filteredRest = restaurants.filter(rest => {
-                for(let i = 0; i < filter.length; i++) {
-                    if (rest.flavours.includes(filter[i])) {
-                        return rest
-                    }
-                }
-                for(let i = 0; i < filter.length; i++) {
-                    if (rest.foodTypes.includes(filter[i])){
-                        return rest
-                    }
-                }
-            })        
-            console.log(filteredRest)
-            setRestaurants(filteredRest)
-        } else {
+        } else if (filter.length === 0 && wineFilter === 'allRest') {
             setRestaurants(restaurantData)
         }
 
-    },[filter.length])
+        console.log(restaurants);
 
-    // const [state, dispatch] = useReducer((state, action) => {
+    },[filter.length, wineFilter])
 
-    //     switch(action.type) {
-    //         case 'SOUR': {
-    //             restaurants.filter(rest => {
-    //                 if (rest.flavours.includes('sour')) {
-    //                     return rest
-    //                 }
-    //             })
-    //         }
-    //         case 'REFRESHING': {
-    //             restaurants.filter(rest => {
-    //                 if (rest.flavours.includes('refreshing')) {
-    //                     return rest
-    //                 }
-    //             })
-    //         }
-    //     }
-    // })
+
 
     return (
         <DivContainer>

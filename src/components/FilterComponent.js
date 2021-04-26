@@ -2,23 +2,16 @@ import {FilterContainer, DropdownContainer, CheckboxContainer, DeleteContainer, 
 import Dropdown from './Dropdown';
 import {useState, useContext, useEffect} from 'react';
 import Checkbox from './Checkbox';
-import _, { forEach } from "lodash";
-import {FilterContext} from '../context/FilterContext';
+import _ from "lodash";
 import {WineFilterContext} from '../context/WineFilterContext';
 import SegmentedButton from './SegmentedButton'
 import MobileFilter from './MobileFilter';
-import {RestaurantContext} from '../context/RestaurantContext';
-import StateManager from 'react-select';
+import {FilterContext} from '../context/FilterContext'
 
 function FilterComponent() {
     const [filter, setFilter] = useContext(FilterContext)
-    const [wineFilter, setWineFilter] = useContext(WineFilterContext)
 
-    // const [sour, setSour] = useState(false)
-    // const [refreshing, setRefreshing] = useState(false)
-    // const [savory, setSavory] = useState(false)
-    // const [spicy, setSpicy] = useState(false)
-    // const [sweet, setSweet] = useState(false)
+    const [wineFilter, setWineFilter] = useContext(WineFilterContext)
 
     const flavours = [
         'sour',
@@ -41,10 +34,6 @@ function FilterComponent() {
         'sandwich',
         'seafood'
     ]
-    const wines = [
-        'show me the wine!',
-        'no wine'
-    ]
 
     const [flavourFilter, setFlavourFilter] = useState(flavours.map(flavour => ({
         "value": false,
@@ -56,33 +45,30 @@ function FilterComponent() {
         "name" : type
     })))
 
-
     //list to check if there is filtering selected for condition rendering of "refine by"
     const filteredFlavourStrings = flavourFilter.filter(flavour => {
         return flavour.value === true
     }).map(flavour => {
-        return flavour.name.toLowerCase()
+        return flavour.name
     })
     
     const filteredTypeStrings = typeFilter.filter(type => {
         return type.value === true
     }).map(type => {
-        return type.name.toLowerCase()
+        return type.name
     })
 
     const filteredList = filteredFlavourStrings.concat(filteredTypeStrings)
-    console.log(filteredList)
 
     useEffect(() => {
+
         setFilter(filteredList)
+        
     }, [filteredList.length])
 
-    console.log(filter)
 
     //checkbox handling 
     const handleChoice = (e) => {
-
-
         const choice = e.target.value;
         const group = e.target.name;
         
@@ -110,7 +96,6 @@ function FilterComponent() {
                 }
             }
             checkedTypeFilter[index].value = !checkedTypeFilter[index].value;
-
             setTypeFilter(checkedTypeFilter);
         } 
     }
@@ -126,130 +111,6 @@ function FilterComponent() {
         "name" : type
         }))))
     }
-
-    
-    // restaurants.forEach(rest => {
-    //     if (rest.flavours.includes('sour')){
-    //         console.log(rest)
-    //     }
-    // })
-
-    // const strings = ['sweet', 'sour']
-
-    // restaurants.forEach(rest => {
-    //     if(rest.flavours.includes()){
-    //         console.log(rest)
-    //     }
-    // })
-    // strings.forEach(string => {
-    //     restaurants.forEach(rest => {
-    //         if (rest.flavours.includes(string)){
-    //             console.log(rest)
-    //         }
-    //     })
-    // })
-
-
-    // function filterRestaurants(restaurants) {
-    //     return restaurants.filter (
-    //         (restaurant) => {
-    //             restaurant.flavours.includes()
-    //         }
-    //     )
-    // }
-
-    // const filteredRest = []
-
-    // filteredList.forEach(string => {
-    //     restaurants.forEach(rest => {
-    //         if (rest.flavours.includes(string) || rest.foodTypes.includes(string)) {
-    //             filteredRest.push(rest)
-
-    //         }
-    //     })
-    // })
-    
-    // console.log('filteredRest', filteredRest)
-    
-    // const filteredRestaurants = restaurants.filter(restaurant => {
-    //         if (restaurant.flavours.includes(e.target.value.toLowerCase()) || restaurant.foodTypes.includes(e.target.value.toLowerCase())) {
-    //             return restaurant
-    //         }
-    //     })
-    //     console.log(filteredRestaurants)
-
-    // useEffect(() => {
-        
-    // const filteredRest = []
-
-    // if (filteredList.length > 0) {
-    //     filteredList.forEach(string => {
-    //         restaurants.forEach(rest => {
-    //             if (rest.flavours.includes(string) || rest.foodTypes.includes(string)) {
-    //                 filteredRest.push(rest)
-    //             }
-    //         })
-    //     })        
-    // } 
-
-    // setRestaurants(filteredRest)
-
-    //     // console.log(filteredRestaurants)
-    
-    // }, [filteredList.length])
-    
-    
-    
-    // const filtRest = restaurants.filter(rest => {
-    //     filteredList.forEach(string => {
-    //         if (rest.flavours.includes(string) || rest.foodTypes.includes(string)) {
-    //             return rest
-    //         }
-    //     })
-    // })
-    // console.log(restaurants.0.flavours)
-    // const filterRestaurants = (filteredList) => {
-    //     const copyAllRestaurants = _.cloneDeep(restaurants);
-
-    //     const filteredRestaurants = copyAllRestaurants.filter((restaurant) => {
-    //         if (restaurant.flavours.includes())
-    //     })
-    
-    // }
-    // filterRestaurants();
-
-    // const filteredRestaurants = restaurants.filter(restaurant => {
-    //     filteredFlavourStrings.forEach(string => {
-    //         restaurants.flavour.forEach(flavour => {
-    //             if string
-    //         })
-    //     })
-    // })
-
-//     const filteredRestaurantList = restaurants.filter(restaurant => {
-//             filteredList.forEach(item => {
-//                 if (restaurant.flavour.contains(item)) {
-//                     return restaurant
-//                 }
-//             })
-//         })
-// console.log(filteredRestaurantList)
-
-
-        // const filteredRestaurants = filteredList.forEach(item => {
-        //     restaurants.filter(restaurant => {
-        //         if(restaurant.flavours.contains(item)) {
-        //             console.log(restaurant)
-        //         }
-        //     })
-        // })
-    // restaurantList.sort(sort("name"));
-
-    // setRestaurants(restaurantList);
-
-
-
-
 
     return (
     <form >

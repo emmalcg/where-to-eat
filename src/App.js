@@ -1,5 +1,3 @@
-// import './App.css';
-
 import { GlobalStyles } from './components/styles/GlobalStyles';
 import {RestaurantProvider} from './context/RestaurantContext';
 import {FilterProvider} from './context/FilterContext';
