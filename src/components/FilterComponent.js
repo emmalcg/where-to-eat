@@ -9,7 +9,7 @@ import MobileFilter from './MobileFilter';
 import {FilterContext} from '../context/FilterContext'
 
 function FilterComponent() {
-    const [filter, setFilter] = useContext(FilterContext)
+    const [filter, setFilter] = useContext(FilterContext) // eslint-disable-line
 
     const [wineFilter, setWineFilter] = useContext(WineFilterContext)
 
@@ -64,7 +64,7 @@ function FilterComponent() {
 
         setFilter(filteredList)
         
-    }, [filteredList.length])
+    }, [filteredList.length]) // eslint-disable-line
 
 
     //checkbox handling 

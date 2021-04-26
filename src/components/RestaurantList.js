@@ -87,7 +87,7 @@ function RestaurantList() {
     })
 
 
-    }, [])
+    }, []) // eslint-disable-line
 
     useEffect(() => {
 
@@ -103,7 +103,7 @@ function RestaurantList() {
             })
 
             setRestaurants(filteredRest)
-            
+
         } if(filter.length > 0 && wineFilter === 'wineOnly') {
 
             console.log('filter', filter);
@@ -136,9 +136,7 @@ function RestaurantList() {
             setRestaurants(restaurantData)
         }
 
-        console.log(restaurants);
-
-    },[filter.length, wineFilter])
+    },[filter.length, wineFilter]) // eslint-disable-line
 
 
 
