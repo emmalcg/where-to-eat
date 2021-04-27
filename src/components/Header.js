@@ -7,7 +7,7 @@ const Heading = styled.header`
         margin: 4rem auto;
         font-size: calc(2rem + 7vw);
         font-family: 'Roboto', sans-serif;
-        font-weight: 400;
+        font-weight: 900;
         font-style: italic;
         text-transform: uppercase;
         color: var(--lightened-background);

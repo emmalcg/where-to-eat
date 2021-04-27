@@ -27,9 +27,7 @@ function Loader() {
             stroke: var(--main-text-color);
             stroke-width: 0.05rem;
             stroke-linecap: round;
-            fill: none;
-
-        
+            fill: var(--lightened-background);
     `
 
     return (
