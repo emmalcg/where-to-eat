@@ -3,8 +3,7 @@ import React, {useState, createContext} from 'react';
 export const WineFilterContext = createContext();
 
 export const WineFilterProvider = ({children}) => {
-    const [wineFilter, setWineFilter] = useState('allRest');
-    
+    const [wineFilter, setWineFilter] = useState("allRest");
     return (
         <WineFilterContext.Provider value={[wineFilter, setWineFilter]}>
             {children}

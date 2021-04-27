@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import Marquee from './Marquee.js';
-
+import Marquee from './Marquee';
 const Heading = styled.header`
     text-align: center;
 

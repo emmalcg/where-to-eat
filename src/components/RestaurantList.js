@@ -1,48 +1,21 @@
 import styled from 'styled-components';
 import firebase from '../firebase';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import RestaurantCard from './RestaurantCard';
-import {RestaurantContext} from '../context/RestaurantContext';
 import {WineFilterContext} from '../context/WineFilterContext';
-import {FilterContext} from '../context/FilterContext';
 
-
-const DivContainer = styled.div`
-    position: relative
-`
-const UlStyles = styled.ul`
+const UlStyled = styled.ul`
     margin-top: 20px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     grid-gap: 2rem;
 `
-const AddLink = styled.a`
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    position: absolute;
-    right: 0;
-    top: -3.5rem;
-    background-color:var(--lightened-background);
-    transition: background-color 0.3s ease;
-    padding: 0.5rem;
-    border: 1px solid var(--main-text-color);
-
-    &:hover,
-    &:focus {
-        background-color #DCFFFA
-    }
-`
 
 function RestaurantList() {
     const [restaurantData, setRestaurantData] = useState([])
-    const [restaurants, setRestaurants] = useContext(RestaurantContext)
-    const [wineFilter] =useContext(WineFilterContext)
-    const [filter] = useContext(FilterContext);
-
-
-
-
+    const [restaurants, setRestaurants] = useState([])
+    const [wineFilter] = useContext(WineFilterContext);
 
     useEffect(() => {
         const dbRef = firebase.database().ref();
@@ -81,80 +54,35 @@ function RestaurantList() {
 
         restaurantList.sort(sort("name"));
 
-        setRestaurantData(restaurantList)
-
+        setRestaurantData(restaurantList);
         setRestaurants(restaurantList);
     })
 
-
-    }, []) // eslint-disable-line
+    }, []) 
 
     useEffect(() => {
-
-        if (filter.length > 0 && wineFilter === 'allRest') {
-            const filteredRest = restaurantData.filter(rest => {
-                let matchesFilter = false
-                for(let i = 0; i < filter.length; i++) {
-                    if (rest.flavours.includes(filter[i]) || rest.foodTypes.includes(filter[i])) {
-                    matchesFilter = true
-                    }
-                }
-                return matchesFilter
+        if(wineFilter ==="wineOnly") {
+            const wineFiltered = restaurantData.filter((rest) => {
+                return rest.wine === true
             })
-
-            setRestaurants(filteredRest)
-
-        } if(filter.length > 0 && wineFilter === 'wineOnly') {
-
-            console.log('filter', filter);
-
-            const filteredRest = restaurantData.filter(rest => {
-                let matchesFilter = false
-                for(let i = 0; i < filter.length; i++) {
-                    if (rest.flavours.includes(filter[i]) || rest.foodTypes.includes(filter[i])) {
-                    matchesFilter = true
-                    }
-                }
-                return matchesFilter
-            }).filter(rest => {
-                if (rest.wine === true) {
-                    return rest
-                }
-            })
-
-            setRestaurants(filteredRest)
-
-        } if (filter.length === 0 && wineFilter === 'wineOnly') {
-            const filteredRest = restaurantData.filter(rest => {
-                if(rest.wine === true) {
-                    return rest
-                }
-            })
-            setRestaurants(filteredRest)
-
-        } else if (filter.length === 0 && wineFilter === 'allRest') {
+            setRestaurants(wineFiltered)
+        } else(
             setRestaurants(restaurantData)
-        }
-
-    },[filter.length, wineFilter]) // eslint-disable-line
-
-
+        )
+    }, [wineFilter, restaurantData])
 
     return (
-        <DivContainer>
-            <AddLink href="#form">Add a Restaurant</AddLink>
-            <UlStyles>
-                {restaurants.map((restaurant) => {
-                    return (
-                    <RestaurantCard
-                        key={restaurant.uniqueKey}
-                        restaurant={restaurant}
-                    />
-                    )
-                })}
+        <UlStyled>
+            {restaurants.map((restaurant) => {
+                return (
+                <RestaurantCard
+                    key={restaurant.uniqueKey}
+                    restaurant={restaurant}
+                />
+                )
+            })}
 
-            </UlStyles>
-        </DivContainer>
+        </UlStyled>
     )
 }
 

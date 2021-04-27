@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import {WineFilterContext} from '../context/WineFilterContext';
 
 const FieldsetStyled = styled.fieldset`
     margin-left: auto;
@@ -9,11 +11,12 @@ const Radio = styled.input`
     position: fixed;
     width: 0px;
     height: 0px; 
+    z-index: 1;
 
 
     &:focus + label {
         text-decoration: underline;
-        background-color: blue;
+        background-color #DCFFFA
     }
     
 
@@ -26,49 +29,48 @@ const Radio = styled.input`
 `
 
 const Label = styled.label`
-    font-size: 1.6rem;
     outline: 1px solid var(--main-text-color);
+    font-size: 1.6rem;
     text-align: center;
     background-color: var(--lightened-background);
     transition: background-color 0.3s ease;
     padding: 0.5rem 1rem;
-    text-transform: uppercase;
     position: relative;
-    top: 1.3rem;
+    text-transform: uppercase;
 
     cursor: pointer;
 `
 
-function SegmentedButton(props) {
-    const {legend, name, firstId, firstChecked, firstLabel, onChange, secondId, secondChecked, secondLabel} = props
+function WineFilter() {
+    const [wineFilter, setWineFilter] = useContext(WineFilterContext)
 
     return (
     <FieldsetStyled>
         <div>
-            <legend className="sr-only">{legend}</legend>
+            <legend className="sr-only">Filter by Wine</legend>
         </div>
 
         <Radio 
             type="radio" 
-            id={firstId}
-            value={firstId}
-            name={name}
-            checked={firstChecked}
-            onChange={onChange}
+            id="allRest"
+            value="allRest"
+            name='wineFilter'
+            checked={wineFilter === "allRest"}
+            onChange={(e) => { setWineFilter(e.target.value)}}
         />
-        <Label htmlFor={firstId}>{firstLabel}</Label>
+        <Label htmlFor="allRest">All</Label>
 
         <Radio 
             type="radio" 
-            id={secondId}
-            value={secondId}
-            name={name}
-            checked={secondChecked}
-            onChange={onChange}
+            id="wineOnly"
+            value="wineOnly"
+            name='wineFilter'
+            checked={wineFilter === "wineOnly"}
+            onChange={(e) => { setWineFilter(e.target.value)}}
         />
-        <Label htmlFor={secondId}>{secondLabel}</Label>
+        <Label htmlFor="wineOnly">Wine</Label>
     </FieldsetStyled>
 
     )
 }
-export default SegmentedButton
+export default WineFilter;
