@@ -18,7 +18,17 @@ function App() {
         setLoading(false)
       }, 3000);
     }
-  }, [])
+  }, [loading])
+
+  const [formLoad, setFormLoad] = useState(false);
+
+  useEffect(() => {
+    if (formLoad) {
+      setTimeout(() => {
+        setFormLoad(true)
+      }, 3500);
+    }
+  }, [formLoad])
 
   return (
     
@@ -30,13 +40,14 @@ function App() {
           <Subheading/>
           <main>
             {
-              loading 
-              ? <Loader/>
-              : <>
-                  <RestaurantList/>
-                  <AddForm />
-                </>
+              loading &&
+              <Loader/>
             }
+            
+            <RestaurantList
+              className={loading && 'hidden'}
+              /> 
+            <AddForm />
           </main>
         </div>
       </WineFilterProvider>

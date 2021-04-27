@@ -10,9 +10,15 @@ const UlStyled = styled.ul`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     grid-gap: 2rem;
+    opacity: 1;
+    transition: all 0.3s ease;
+
+    &.hidden {
+        opacity: 0;
+    }
 `
 
-function RestaurantList() {
+function RestaurantList({className}) {
     const [restaurantData, setRestaurantData] = useState([])
     const [restaurants, setRestaurants] = useState([])
     const [wineFilter] = useContext(WineFilterContext);
@@ -72,7 +78,9 @@ function RestaurantList() {
     }, [wineFilter, restaurantData])
 
     return (
-        <UlStyled>
+        <UlStyled
+            className={className}
+        >
             {restaurants.map((restaurant) => {
                 return (
                 <RestaurantCard

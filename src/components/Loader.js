@@ -15,6 +15,7 @@ function Loader() {
         justify-content: center;
         align-items: center;
         margin: 8rem 0 20rem;
+        z-index: 1;
 
 
         .svg {
