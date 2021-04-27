@@ -18,7 +18,7 @@ const AddLink = styled.a`
 
     &:hover,
     &:focus {
-        background-color #DCFFFA
+        background: var(--gradient);
     }
 `
 

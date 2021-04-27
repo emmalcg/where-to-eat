@@ -20,16 +20,6 @@ function App() {
     }
   }, [loading])
 
-  const [formLoad, setFormLoad] = useState(false);
-
-  useEffect(() => {
-    if (formLoad) {
-      setTimeout(() => {
-        setFormLoad(true)
-      }, 3500);
-    }
-  }, [formLoad])
-
   return (
     
     <div>
@@ -47,11 +37,19 @@ function App() {
             <RestaurantList
               className={loading && 'hidden'}
               /> 
-            <AddForm />
+            {
+              loading 
+              ? null
+              :<AddForm />
+            }
           </main>
         </div>
       </WineFilterProvider>
-      <Footer />
+      {
+        loading
+        ? null
+        : <Footer />
+      }
     </div>
 
     )

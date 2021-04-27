@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import {useState} from 'react';
-import Pointy from './Pointy.js';
+import WineGlass from './WineGlass';
 
 const MarqueeDiv = styled.div`
     position: relative;
     width: 100vw;
     max-width: 100%;
     height: 60px;
-    overflow-x: hidden;
+    padding-top: 0.4rem;
+    overflow: hidden;
     background: var(--gradient); 
     border-bottom: 1px solid var(--main-text-color);
 
@@ -60,7 +61,7 @@ const MarqueeDiv = styled.div`
 }
 `;
 
-function Marquee(props) {
+function MarqueeBanner(props) {
     const [isActive, setIsActive] = useState(true)
 
     const handleMouseEnter = (e) => {
@@ -77,23 +78,25 @@ function Marquee(props) {
                 <h2 className={isActive 
                 ? 'marquee-content'
                 : 'marquee-content inactive'}>
-                    <Pointy className="smallIcon"/>
+                    <WineGlass className="smallIcon"/>
                     <span>{props.text}</span>
-                    <Pointy className="smallIcon"/>
+                    <WineGlass className="smallIcon"/>
                     <span>{props.text}</span>
-                    <Pointy className="smallIcon"/>
+                    <WineGlass className="smallIcon"/>
                     <span>{props.text}</span>
-                    <Pointy className="smallIcon"/>
+                    <WineGlass className="smallIcon"/>
                     <span>{props.text}</span>
-                    <Pointy className="smallIcon"/>
+                    <WineGlass className="smallIcon"/>
                     <span>{props.text}</span>
-                    <Pointy className="smallIcon"/>
+                    <WineGlass className="smallIcon"/>
                     <span>{props.text}</span>
-                    <Pointy className="smallIcon"/>
+                    <WineGlass className="smallIcon"/>
+                    <span>{props.text}</span>
+                    <WineGlass className="smallIcon"/>
                 </h2>
             </div>
         </MarqueeDiv>
     )
 }
 
-export default Marquee;
+export default MarqueeBanner;
