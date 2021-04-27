@@ -1,67 +1,56 @@
-import './App.css';
-import firebase from './firebase.js';
-import { useEffect, useState } from 'react';
-import RestaurantCard from './RestaurantCard.js';
-import Header from './Header.js';
-import Form from './Form.js';
-import Footer from './Footer.js'
+import { GlobalStyles } from './components/styles/GlobalStyles';
+import {WineFilterProvider } from './context/WineFilterContext';
+import { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Loader from './components/Loader';
+import RestaurantList from './components/RestaurantList'
+import Subheading from './components/Subheading';
+import AddForm from './components/AddForm';
+import Footer from './components/Footer'
 
 function App() {
-  const [restaurants, setRestaurants] = useState([]);
 
-    useEffect(() => {
-      const dbRef = firebase.database().ref();
-      
-      dbRef.on('value', (data) => {
-        const restaurantData = data.val();
+  const [loading, setLoading] = useState(true)
+  
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoading(false)
+      }, 3000);
+    }
+  }, [loading])
 
-        const restaurantList = [];
+  const [formLoad, setFormLoad] = useState(false);
 
-        for (let restaurantKey in restaurantData) {
-          restaurantList.push({
-            uniqueKey: restaurantKey,
-            name: restaurantData[restaurantKey].name,
-            wine: restaurantData[restaurantKey].wine,
-            flavours: restaurantData[restaurantKey].flavours,
-            foodTypes: restaurantData[restaurantKey].foodTypes,
-          })
-        }
-        
-        const sort = (property) => {
-          let sortOrder = 1;
-
-          if(property[0] ==='-') {
-            sortOrder = -1;
-            property = property.substr(1);
-          }
-
-          return function (a,b) {
-            if(sortOrder === -1) {
-              return b[property].localCompare(a[property]);
-            }else{
-              return a[property].localeCompare(b[property]);
-            }
-          }
-        }
-
-        restaurantList.sort(sort("name"));
-
-        setRestaurants(restaurantList);
-      })
-    }, [])
+  useEffect(() => {
+    if (formLoad) {
+      setTimeout(() => {
+        setFormLoad(true)
+      }, 3500);
+    }
+  }, [formLoad])
 
   return (
     
     <div>
+      <GlobalStyles />
       <Header />
-      <div className="wrapper">
-        <main>
-        <RestaurantCard
-          restaurantInfo={restaurants}
-          />
-        <Form />
-        </main>
-      </div>
+      <WineFilterProvider>
+        <div className="wrapper">
+          <Subheading/>
+          <main>
+            {
+              loading &&
+              <Loader/>
+            }
+            
+            <RestaurantList
+              className={loading && 'hidden'}
+              /> 
+            <AddForm />
+          </main>
+        </div>
+      </WineFilterProvider>
       <Footer />
     </div>
 
