@@ -1,4 +1,8 @@
 import styled from 'styled-components';
+import { useRef } from 'react';
+import { useIntersection } from 'react-use';
+import gsap from 'gsap';
+import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const StyledCard = styled.li`
     display: flex;
@@ -64,9 +68,40 @@ const StyledCard = styled.li`
 
 
 function RestaurantCard({restaurant}) {
+    
+    const ref = useRef(null);
+
+    
+    const intersection = useIntersection(ref, {
+        root: null,
+        rootMargin: '300px',
+        threshold: 1,
+    
+        // threshold: new Array(101).fill(0).map((v, i) => i * 0.1)
+    })
+    
+    const fadeIn = element => {
+        gsap.to(ref.current, {
+            opacity: 1,
+            ease: 'sine',
+            duration: 1,
+        })
+    }
+
+    const fadeOut = element => {
+        gsap.from(ref.current, {
+            opacity: 0,
+            ease: 'sine',
+            duration: 1,
+        })
+    }
+
+    intersection && intersection.intersectionRatio < 1
+    ? fadeOut()
+    : fadeIn()
 
     return (
-        <StyledCard>
+        <StyledCard ref={ref}>
             <h3>{restaurant.name}</h3>
             <div className="restaurantFlavours">
                 <h4>Flavours</h4>
